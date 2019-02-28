@@ -4,22 +4,35 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
-import { MyApp } from './app.component';
+import { AwesomePlaces } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { AddPlacePage } from '../pages/add-place/add-place';
+import { PlacePage } from '../pages/place/place';
+import { SetLocationPage } from '../pages/set-location/set-location';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
-    MyApp,
-    HomePage
+    AwesomePlaces,
+    HomePage,
+    AddPlacePage,
+    PlacePage,
+    SetLocationPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(AwesomePlaces),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAqA5AJKX2LN56yzt35g5LRZj7c3Be0i54'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    HomePage
+    AwesomePlaces,
+    HomePage,
+    AddPlacePage,
+    PlacePage,
+    SetLocationPage
   ],
   providers: [
     StatusBar,
