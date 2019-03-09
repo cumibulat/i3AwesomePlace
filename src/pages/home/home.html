@@ -3,7 +3,7 @@
     <ion-buttons end>
       <button ion-button icon-only [navPush]="addPlacePage">
         <ion-icon name="add"></ion-icon>
-      </button> 
+      </button>
     </ion-buttons>
     <ion-title>
       Awesome Places
@@ -12,5 +12,15 @@
 </ion-header>
 
 <ion-content padding>
- 
+  <ion-card *ngFor="let place of places; let i = index" (click)="onOpenPlace(place, i)">
+    <img [src]="place.imagePath">
+    <ion-card-content text-center>
+      <ion-card-title >
+        {{place.title}}
+      </ion-card-title>
+      <p>{{place.description}}</p>
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>

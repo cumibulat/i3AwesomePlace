@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { ModalController, LoadingController, ToastController, NavController } from 'ionic-angular';
 import { SetLocationPage } from '../set-location/set-location';
 import { Location } from '../../models/location';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera, CameraOptions  } from '@ionic-native/camera';
+import { PlacesService } from '../../services/places';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -17,16 +20,30 @@ export class AddPlacePage {
   };
 
   locationIsSet = false;
+  imageUrl = 'https://4.img-dpreview.com/files/p/E~TS590x0~articles/3925134721/0266554465.jpeg';
 
   constructor (
     private modalCtrl: ModalController,
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private camera: Camera,
+    private placesSvc: PlacesService,
+    private navCtrl: NavController,
+    
   ){}
 
   onSubmit(f: NgForm){
-    console.log('isi form : ', f.value);
+    this.placesSvc.addPlaces(f.value.title, f.value.description, this.location, this.imageUrl);
+    f.reset();
+    this.location = {
+      lat: -6.197291332275369,
+      lng: 106.82453977546311
+    };
+    this.locationIsSet = false;
+    
+    this.navCtrl.push(HomePage);
+
   }
 
   onLocate(){
@@ -50,8 +67,6 @@ export class AddPlacePage {
             duration: 2000,
           })
           toast.present();
-          console.log('error gans :: ', error);
-          
         }
       );
   }
@@ -74,6 +89,22 @@ export class AddPlacePage {
 
   onTakePhoto(){
 
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.imageUrl = base64Image;
+     }, (err) => {
+      // Handle error
+     });
   }
 
 }
