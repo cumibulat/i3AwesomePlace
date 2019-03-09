@@ -5,9 +5,11 @@ import { SetLocationPage } from '../set-location/set-location';
 import { Location } from '../../models/location';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera, CameraOptions  } from '@ionic-native/camera';
+import { File, Entry, FileError } from '@ionic-native/file';
 import { PlacesService } from '../../services/places';
 import { HomePage } from '../home/home';
 
+declare var cordova: any;
 
 @Component({
   selector: 'page-add-place',
@@ -30,6 +32,7 @@ export class AddPlacePage {
     private camera: Camera,
     private placesSvc: PlacesService,
     private navCtrl: NavController,
+    private file: File,
     
   ){}
 
@@ -98,12 +101,38 @@ export class AddPlacePage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
+      const photoName = imageData.replace(/^.*[\\\/]/, '');
+      const path = imageData.replace(/[^\/]*$/, '');
+      const newFileName = new Date().getUTCMilliseconds + '.jpg';
+
+      this.file.moveFile(path, photoName, cordova.file.dataDirectory, newFileName)
+        .then(
+          (data: Entry) => {
+            this.imageUrl = data.nativeURL;
+            
+          }
+        )
+        .catch(
+          (error: FileError) => {
+            this.imageUrl = '';
+            const toast = this.toastCtrl.create({
+              message : 'Could not save image, please try again..',
+              duration : 2500,
+            });
+            toast.present();
+            // Camera.cleanup();
+          }
+        );
+
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.imageUrl = base64Image;
      }, (err) => {
       // Handle error
+      const toast = this.toastCtrl.create({
+        message : 'Could not take image, please try again..',
+        duration : 2500,
+      });
+      toast.present();
      });
   }
 
