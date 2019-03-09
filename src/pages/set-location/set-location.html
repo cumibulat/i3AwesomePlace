@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar>
     <ion-title>Choose Location</ion-title>
@@ -9,9 +8,26 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-          <agm-map>
+        <agm-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="16" (mapClick)="onSetMarker($event)">
+          <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" *ngIf="marker">
 
-          </agm-map>
+          </agm-marker>
+
+        </agm-map>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block icon-left color="secondary" (click)="onConfirm()" [disabled]="!marker">
+          <ion-icon name="logo-buffer"></ion-icon>
+          Confirm
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block icon-left (click)="onAbort()" color="danger">
+          <ion-icon name="close"></ion-icon>
+          Abort
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
