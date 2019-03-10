@@ -16,6 +16,8 @@ import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { PlacesService } from '../services/places';
 import { IonicStorageModule  } from '@ionic/storage';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { IonicStorageModule  } from '@ionic/storage';
     Geolocation,
     Camera,
     File,
+    FingerprintAIO,
     PlacesService
   ]
 })
