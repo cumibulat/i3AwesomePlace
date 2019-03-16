@@ -1,14 +1,23 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+  Component
+} from '@angular/core';
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  LoadingController
+} from 'ionic-angular';
 
 import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  Marker,
-  Environment
+  Marker
 } from '@ionic-native/google-maps';
+import {
+  Geolocation
+} from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -18,47 +27,74 @@ import {
 export class NativeMapsPage {
   map: GoogleMap;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController
+  ) {}
 
   loadMap() {
-    Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
+
+    let currLat: number;
+    let currLng: number;
+
+    const loader = this.loadingCtrl.create({
+      content: "Getting your location..."
     });
+    this.geolocation.getCurrentPosition({
+        enableHighAccuracy: true
+      })
+      .then(
+        loc => {
+          loader.dismiss();
+          currLat = loc.coords.latitude;
+          currLng = loc.coords.longitude;
 
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
+          let mapOptions: GoogleMapOptions = {
+            camera: {
+              target: {
+                lat: currLat,
+                lng: currLng
+              },
+              zoom: 18,
+              tilt: 30
+            }
+          };
 
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
+          this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-    let marker: Marker = this.map.addMarkerSync({
-      title: 'Test Cumi !',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: 43.0741904,
-        lng: -89.3809802
-      }
-    });
+          let marker: Marker = this.map.addMarkerSync({
+            title: 'Test Cumi !',
+            icon: 'blue',
+            animation: 'DROP',
+            position: {
+              lat: currLat,
+              lng: currLng
+            }
+          });
 
-    marker.showInfoWindow();
+          marker.showInfoWindow();
 
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
-    });
+          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+            alert('clicked');
+          });
+        })
+      .catch(
+        error => {
+          loader.dismiss();
+          console.log(error);
+        });
+
+
   }
 
   ionViewDidLoad() {
     this.loadMap();
+  }
+
+  onButtonClick(ev: any) {
+    alert('check :: ' + ev);
   }
 
 }
