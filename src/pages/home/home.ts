@@ -30,6 +30,7 @@ import {
   Marker,
   Environment
 } from '@ionic-native/google-maps';
+import { NativeMapsPage } from '../native-maps/native-maps';
 
 @Component({
   selector: 'page-home',
@@ -38,6 +39,7 @@ import {
 export class HomePage implements OnInit {
 
   addPlacePage = AddPlacePage;
+  nativeMapsPage = NativeMapsPage;
   places: Place[] = [];
   map: GoogleMap;
 
@@ -102,8 +104,8 @@ export class HomePage implements OnInit {
 
   loadMap() {
     Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAqA5AJKX2LN56yzt35g5LRZj7c3Be0i54',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAqA5AJKX2LN56yzt35g5LRZj7c3Be0i54'
+      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY',
+      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
     });
 
     let mapOptions: GoogleMapOptions = {

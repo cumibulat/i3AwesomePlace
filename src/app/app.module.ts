@@ -20,6 +20,7 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { NativeMapsPage } from '../pages/native-maps/native-maps';
 
 
 @NgModule({
@@ -28,13 +29,14 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     HomePage,
     AddPlacePage,
     PlacePage,
-    SetLocationPage
+    SetLocationPage,
+    NativeMapsPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(AwesomePlaces),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAqA5AJKX2LN56yzt35g5LRZj7c3Be0i54'
+      apiKey: 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
     }),
     IonicStorageModule.forRoot()
   ],
@@ -44,7 +46,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     HomePage,
     AddPlacePage,
     PlacePage,
-    SetLocationPage
+    SetLocationPage,
+    NativeMapsPage
   ],
   providers: [
     StatusBar,

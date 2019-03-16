@@ -17,6 +17,10 @@
   <!-- <div id="map_canvas">
     <button ion-button (click)="onButtonClick($event)">Demo</button>
   </div> -->
+  <ion-buttons>
+    <button ion-button block [navPush]="nativeMapsPage">Native Maps</button>
+  </ion-buttons>
+  
 
   <ion-card *ngFor="let place of places; let i = index" (click)="onOpenPlace(place, i)">
     <img [src]="place.imagePath">
