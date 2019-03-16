@@ -19,6 +19,9 @@ import { IonicStorageModule  } from '@ionic/storage';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 
 
+import { GoogleMaps } from '@ionic-native/google-maps';
+
+
 @NgModule({
   declarations: [
     AwesomePlaces,
@@ -51,7 +54,8 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
     Camera,
     File,
     FingerprintAIO,
-    PlacesService
+    PlacesService,
+    GoogleMaps 
   ]
 })
 export class AppModule {}
