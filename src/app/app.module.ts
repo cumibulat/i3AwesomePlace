@@ -1,3 +1,4 @@
+import { FingerprintPage } from './../pages/fingerprint/fingerprint';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -30,7 +31,8 @@ import { NativeMapsPage } from '../pages/native-maps/native-maps';
     AddPlacePage,
     PlacePage,
     SetLocationPage,
-    NativeMapsPage
+    NativeMapsPage,
+    FingerprintPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import { NativeMapsPage } from '../pages/native-maps/native-maps';
     AddPlacePage,
     PlacePage,
     SetLocationPage,
-    NativeMapsPage
+    NativeMapsPage,
+    FingerprintPage
   ],
   providers: [
     StatusBar,
