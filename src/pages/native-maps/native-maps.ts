@@ -13,7 +13,13 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  Marker
+  Marker,
+  LocationService,
+  MyLocation,
+  MyLocationOptions,
+  Geocoder,
+  GeocoderResult,
+  GeocoderRequest
 } from '@ionic-native/google-maps';
 import {
   Geolocation
@@ -36,57 +42,103 @@ export class NativeMapsPage {
 
   loadMap() {
 
-    let currLat: number;
-    let currLng: number;
+    let defaultLat: number = 6.1754;
+    let defaultLng: number = 106.8272;
 
     const loader = this.loadingCtrl.create({
       content: "Getting your location..."
     });
-    this.geolocation.getCurrentPosition({
-        enableHighAccuracy: true
-      })
-      .then(
-        loc => {
-          loader.dismiss();
-          currLat = loc.coords.latitude;
-          currLng = loc.coords.longitude;
 
-          let mapOptions: GoogleMapOptions = {
-            camera: {
-              target: {
-                lat: currLat,
-                lng: currLng
-              },
-              zoom: 18,
-              tilt: 30
-            }
-          };
+    // using geolocation native
+    // this.geolocation.getCurrentPosition({
+    //     enableHighAccuracy: true
+    //   })
+    //   .then(
+    //     loc => {
+    //       loader.dismiss();
+    //       this.drawMap(loc.coords.latitude, loc.coords.longitude);
+    //     })
+    //   .catch(
+    //     error => {
+    //       loader.dismiss();
+    //       console.log(error);
+    //       this.drawMap(defaultLat, defaultLng);
+    //     });
 
-          this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-          let marker: Marker = this.map.addMarkerSync({
-            title: 'Test Cumi !',
-            icon: 'blue',
-            animation: 'DROP',
-            position: {
-              lat: currLat,
-              lng: currLng
-            }
-          });
+    // using Location Service native
+    let locOpt: MyLocationOptions = {
+      enableHighAccuracy: true
+    };
+    LocationService.getMyLocation(locOpt)
+      .then((loc: MyLocation) => {
+        loader.dismiss();
+        this.drawMap(loc.latLng.lat, loc.latLng.lng);
+      });
+  }
 
-          marker.showInfoWindow();
+  drawMap(lat: number, lng: number) {
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: lat,
+          lng: lng
+        },
+        zoom: 18,
+        tilt: 30
+      }
+    };
 
-          marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-            alert('clicked');
-          });
+    this.map = GoogleMaps.create('map_canvas', mapOptions);
+
+    let marker: Marker = this.map.addMarkerSync({
+      title: 'Drag map please !',
+      icon: 'blue',
+      animation: 'DROP',
+      draggable: true,
+      position: {
+        lat: lat,
+        lng: lng
+      }
+    });
+
+    // marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe(
+    //   () => {
+    //     console.log('lat 1 :: ', marker.getPosition().lat);
+    //     console.log('lng 1 :: ', marker.getPosition().lng);
+    //   });
+
+    // marker.on(GoogleMapsEvent.MARKER_DRAG_END).subscribe(
+    //   () => {
+    //     console.log('lat :: ', marker.getPosition().lat);
+    //     console.log('lng :: ', marker.getPosition().lng);
+    //   });
+
+    marker.showInfoWindow();
+
+    this.map.on(GoogleMapsEvent.MAP_DRAG_END).subscribe(
+      () => {
+        let pos = this.map.getCameraTarget();
+        marker.setPosition(pos);
+
+        let options: GeocoderRequest = {
+          position: pos
+        };
+
+        Geocoder.geocode(options)
+        .then((results: GeocoderResult[]) => {
+          if(results.length > 0 && results[0].extra && results[0].extra.lines.length > 0) {
+            marker.setTitle(results[0].extra.lines[0]);
+            marker.showInfoWindow();
+          }
         })
-      .catch(
-        error => {
-          loader.dismiss();
-          console.log(error);
-        });
+      });
 
+    // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+    //   alert('clicked');
+    // });
 
+    
   }
 
   ionViewDidLoad() {
