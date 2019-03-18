@@ -1,3 +1,4 @@
+import { FingerprintPage } from './../pages/fingerprint/fingerprint';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -30,6 +31,10 @@ import { FcmProvider } from '../providers/fcm/fcm';
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
   authDomain: "ideafirebase-256b7.firebaseapp.com",
+  databaseURL: "https://ideafirebase-256b7.firebaseio.com",
+  projectId: "ideafirebase-256b7",
+  storageBucket: "ideafirebase-256b7.appspot.com",
+  messagingSenderId: "341397938822"
  }
 
 @NgModule({
@@ -39,7 +44,8 @@ const firebase = {
     AddPlacePage,
     PlacePage,
     SetLocationPage,
-    NativeMapsPage
+    NativeMapsPage,
+    FingerprintPage
   ],
   imports: [
     BrowserModule,
@@ -58,7 +64,8 @@ const firebase = {
     AddPlacePage,
     PlacePage,
     SetLocationPage,
-    NativeMapsPage
+    NativeMapsPage,
+    FingerprintPage
   ],
   providers: [
     StatusBar,

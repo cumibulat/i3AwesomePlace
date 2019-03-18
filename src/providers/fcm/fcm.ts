@@ -10,6 +10,9 @@ import {
 import {
   AngularFirestore
 } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+
+import { map } from 'rxjs-compat/operators/map';
 
 @Injectable()
 export class FcmProvider {

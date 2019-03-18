@@ -15,7 +15,7 @@
     "@angular/animations": "5.2.11",
     "@angular/common": "5.2.11",
     "@angular/compiler": "5.2.11",
-    "@angular/compiler-cli": "5.2.11",
+    "@angular/compiler-cli": "^7.2.9",
     "@angular/core": "5.2.11",
     "@angular/forms": "5.2.11",
     "@angular/http": "5.2.11",
@@ -33,7 +33,7 @@
     "@ionic/storage": "2.2.0",
     "angularfire2": "^5.1.2",
     "cordova-android": "7.1.4",
-    "cordova-plugin-camera": "4.0.3",
+    "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-fingerprint-aio": "1.6.0",
@@ -48,12 +48,13 @@
     "firebase": "^5.9.0",
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
-    "rxjs": "^5.5.12",
+    "rxjs": "^6.0.0",
+    "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.29"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.2.1",
+    "@ionic/app-scripts": "^3.2.3",
     "typescript": "~2.6.2"
   },
   "description": "An Ionic project",
@@ -74,7 +75,9 @@
       "cordova-plugin-file": {},
       "cordova-plugin-fingerprint-aio": {},
       "cordova-plugin-googlemaps": {
-        "API_KEY_FOR_ANDROID": "AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY"
+        "API_KEY_FOR_ANDROID": "AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY",
+        "PLAY_SERVICES_VERSION": "15.0.1",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
       "cordova-plugin-firebase": {}
     },

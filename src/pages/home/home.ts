@@ -1,10 +1,10 @@
+import { FingerprintPage } from './../fingerprint/fingerprint';
 import {
   Component,
   OnInit
 } from '@angular/core';
 import {
-  ModalController,
-  ToastController
+  ModalController
 } from 'ionic-angular';
 import {
   AddPlacePage
@@ -18,18 +18,6 @@ import {
 import {
   PlacePage
 } from '../place/place';
-import {
-  FingerprintAIO
-} from '@ionic-native/fingerprint-aio';
-
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  GoogleMapOptions,
-  Marker,
-  Environment
-} from '@ionic-native/google-maps';
 import { NativeMapsPage } from '../native-maps/native-maps';
 
 @Component({
@@ -40,60 +28,17 @@ export class HomePage implements OnInit {
 
   addPlacePage = AddPlacePage;
   nativeMapsPage = NativeMapsPage;
+  fingeprintPage = FingerprintPage;
   places: Place[] = [];
-  map: GoogleMap;
-
+  
   constructor(
     private placesSvc: PlacesService,
     private modalCtrl: ModalController,
-    private faio: FingerprintAIO,
-    private toastCtrl: ToastController    
   ) {
     // this.addPlacePage = AddPlacePage;  
   }
 
   ngOnInit() {
-
-    this.faio.isAvailable()
-      .then(
-        () => {
-          console.log('yes device have fingerprint !! ');
-          this.faio.show({
-              clientId: 'Fingerprint-Demo',
-              clientSecret: 'password', //Only necessary for Android
-              disableBackup: true, //Only for Android(optional)
-              localizedFallbackTitle: 'Use Pin', //Only for iOS
-              localizedReason: 'Please authenticate' //Only for iOS
-            })
-            .then((result: any) => {
-              console.log(result)
-              const toast = this.toastCtrl.create({
-                message: 'Fingerprint recognized..',
-                duration: 2500,
-              });
-              toast.present();
-            })
-            .catch((error: any) => {
-              console.log(error);
-              const toast = this.toastCtrl.create({
-                message: 'Error authenticate fingerprint..',
-                duration: 2500,
-              });
-              toast.present();
-            });
-        }
-      )
-      .catch(
-        () => {
-          const toast = this.toastCtrl.create({
-            message: 'Sorry Device is didnt have fingerprint sensor',
-            duration: 2500,
-          });
-          toast.present();
-        }
-      );
-
-
     this.placesSvc.fetchPlacesFromStorage()
       .then(
         (places: Place[]) => {
@@ -102,52 +47,12 @@ export class HomePage implements OnInit {
       );
   }
 
-  loadMap() {
-    Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
-    });
-
-    let mapOptions: GoogleMapOptions = {
-      camera: {
-        target: {
-          lat: 43.0741904,
-          lng: -89.3809802
-        },
-        zoom: 18,
-        tilt: 30
-      }
-    };
-
-    this.map = GoogleMaps.create('map_canvas', mapOptions);
-
-    let marker: Marker = this.map.addMarkerSync({
-      title: 'Test Cumi !',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: 43.0741904,
-        lng: -89.3809802
-      }
-    });
-
-    marker.showInfoWindow();
-
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
-    });
-  }
-
   onOpenPlace(place: Place, index: number) {
     const modal = this.modalCtrl.create(PlacePage, {
       place: place,
       index: index
     });
     modal.present();
-  }
-
-  ionViewDidLoad(){
-    // this.loadMap();
   }
 
   ionViewWillEnter() {
