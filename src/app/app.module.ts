@@ -22,6 +22,15 @@ import { FingerprintAIO } from '@ionic-native/fingerprint-aio';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { NativeMapsPage } from '../pages/native-maps/native-maps';
 
+import { Firebase } from '@ionic-native/firebase';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FcmProvider } from '../providers/fcm/fcm';
+
+const firebase = {
+  apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
+  authDomain: "ideafirebase-256b7.firebaseapp.com",
+ }
 
 @NgModule({
   declarations: [
@@ -38,7 +47,9 @@ import { NativeMapsPage } from '../pages/native-maps/native-maps';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebase), 
+    AngularFirestoreModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +69,9 @@ import { NativeMapsPage } from '../pages/native-maps/native-maps';
     File,
     FingerprintAIO,
     PlacesService,
-    GoogleMaps 
+    GoogleMaps,
+    Firebase,
+    FcmProvider
   ]
 })
 export class AppModule {}
