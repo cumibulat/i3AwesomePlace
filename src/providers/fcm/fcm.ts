@@ -55,6 +55,16 @@ export class FcmProvider {
     return devicesRef.doc(token).set(docData);
   }
 
+  saveMessageToFirestore(msg){
+    const listMessages = this.afs.collection('listMessages');
+
+    const tmpMsg = msg;
+    const tmpNow = new Date();
+    tmpMsg.sendDate = tmpNow;
+
+    return listMessages.doc(tmpNow.getTime().toString()).set(tmpMsg);
+  }
+
   // Listen to incoming FCM messages
   listenToNotifications() {
     return this.firebaseNative.onNotificationOpen();
