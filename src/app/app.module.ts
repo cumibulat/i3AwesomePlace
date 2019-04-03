@@ -27,6 +27,7 @@ import { Firebase } from '@ionic-native/firebase';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FcmProvider } from '../providers/fcm/fcm';
+import { SendmessagePage } from '../pages/sendmessage/sendmessage';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -45,7 +46,8 @@ const firebase = {
     PlacePage,
     SetLocationPage,
     NativeMapsPage,
-    FingerprintPage
+    FingerprintPage,
+    SendmessagePage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ const firebase = {
     PlacePage,
     SetLocationPage,
     NativeMapsPage,
-    FingerprintPage
+    FingerprintPage,
+    SendmessagePage
   ],
   providers: [
     StatusBar,
