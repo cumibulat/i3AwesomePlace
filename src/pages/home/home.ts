@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../../services/authentication';
+import { LoginPage } from './../login/login';
 import { FingerprintPage } from './../fingerprint/fingerprint';
 import {
   Component,
@@ -31,11 +33,13 @@ export class HomePage implements OnInit {
   nativeMapsPage = NativeMapsPage;
   fingeprintPage = FingerprintPage;
   sendMsgPage = SendmessagePage;
+  loginPage = LoginPage;
   places: Place[] = [];
   
   constructor(
     private placesSvc: PlacesService,
     private modalCtrl: ModalController,
+    private authService: AuthenticationService
   ) {
     // this.addPlacePage = AddPlacePage;  
   }
@@ -55,6 +59,10 @@ export class HomePage implements OnInit {
       index: index
     });
     modal.present();
+  }
+
+  doLogout(){
+    this.authService.logout();
   }
 
   ionViewWillEnter() {

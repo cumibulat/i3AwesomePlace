@@ -1,3 +1,5 @@
+import { AuthenticationService } from './../services/authentication';
+import { AppRoutingModule } from './app-routing.module';
 import { FingerprintPage } from './../pages/fingerprint/fingerprint';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -28,6 +30,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FcmProvider } from '../providers/fcm/fcm';
 import { SendmessagePage } from '../pages/sendmessage/sendmessage';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -47,7 +51,9 @@ const firebase = {
     SetLocationPage,
     NativeMapsPage,
     FingerprintPage,
-    SendmessagePage
+    SendmessagePage,
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -58,6 +64,7 @@ const firebase = {
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebase), 
     AngularFirestoreModule,
+    AppRoutingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,7 +75,9 @@ const firebase = {
     SetLocationPage,
     NativeMapsPage,
     FingerprintPage,
-    SendmessagePage
+    SendmessagePage,
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
@@ -81,7 +90,8 @@ const firebase = {
     PlacesService,
     GoogleMaps,
     Firebase,
-    FcmProvider
+    FcmProvider,
+    AuthenticationService
   ]
 })
 export class AppModule {}
