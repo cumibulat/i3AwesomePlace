@@ -32,6 +32,7 @@ import { FcmProvider } from '../providers/fcm/fcm';
 import { SendmessagePage } from '../pages/sendmessage/sendmessage';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { ProfilePage } from '../pages/profile/profile';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -53,7 +54,8 @@ const firebase = {
     FingerprintPage,
     SendmessagePage,
     LoginPage,
-    RegisterPage
+    RegisterPage, 
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ const firebase = {
     FingerprintPage,
     SendmessagePage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

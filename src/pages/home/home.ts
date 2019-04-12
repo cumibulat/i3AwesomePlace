@@ -22,6 +22,7 @@ import {
 } from '../place/place';
 import { NativeMapsPage } from '../native-maps/native-maps';
 import { SendmessagePage } from '../sendmessage/sendmessage';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-home',
@@ -34,6 +35,7 @@ export class HomePage implements OnInit {
   fingeprintPage = FingerprintPage;
   sendMsgPage = SendmessagePage;
   loginPage = LoginPage;
+  profilePage = ProfilePage;
   places: Place[] = [];
   
   constructor(
