@@ -5,30 +5,59 @@
 </ion-header>
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-list>
-      <ion-item>
-        <ion-label fixed>
-          Title
-        </ion-label>
-        <ion-input type="text" placeholder="New APK Launch.." name="title" ngModel required>
+  <ion-segment [(ngModel)]="segmentVal" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="newMessage">
+      New Message
+    </ion-segment-button>
+    <ion-segment-button value="listMessage">
+      List Message
+    </ion-segment-button>
+  </ion-segment>
 
-        </ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>
-          Message
-        </ion-label>
-        <ion-textarea name="message" ngModel required>
-        </ion-textarea>
-      </ion-item>
-      <ion-item>
-        <button ion-button color="secondary" block type="submit" 
-          [disabled]="!f.valid" >
-          Submit Message
-        </button>
-      </ion-item>
+  <div [ngSwitch]="segmentVal">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" *ngSwitchCase="'newMessage'">
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>
+            Title
+          </ion-label>
+          <ion-input type="text" placeholder="New APK Launch.." name="title" ngModel required>
+
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>
+            Message
+          </ion-label>
+          <ion-textarea name="message" ngModel required>
+          </ion-textarea>
+        </ion-item>
+        <ion-item>
+          <button ion-button color="secondary" block type="submit" [disabled]="!f.valid">
+            Submit Message
+          </button>
+        </ion-item>
+      </ion-list>
+    </form>
+
+
+    <ion-list *ngSwitchCase="'listMessage'">
+      <ion-card *ngFor="let message of listMessage | async">
+        <ion-card-header>
+          <h2>{{ message.title }}</h2>
+        </ion-card-header>
+        <ion-card-content>
+          <h4>{{ message.message }}</h4>
+          <p>
+            <!-- <ion-datetime [(ngModel)]=""></ion-datetime> -->
+          </p>
+          {{message.sendDate.toDate()}}
+        </ion-card-content>
+      
+
+      </ion-card>
     </ion-list>
-  </form>
+  </div>
+
 
 </ion-content>

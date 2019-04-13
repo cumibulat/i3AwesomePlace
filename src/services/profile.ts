@@ -12,23 +12,28 @@ import { Observable } from 'rxjs';
 import {
   map
 } from 'rxjs-compat/operators/map';
+import { AngularFirestore } from "angularfire2/firestore";
 @Injectable()
 export class ProfileService {
 
   private userProfile: any;
   constructor(
     private http: Http,
+    private fireStore: AngularFirestore
   ) {
 
   }
 
   fetchProfile() {
-    return this.http.get('https://firestore.googleapis.com/v1/projects/ideafirebase-256b7/databases/(default)/documents/listMessages/')
-    .subscribe((response: Response) => {
+    
+    return this.fireStore.collection<any>('listMessages');
+    
+    // return this.http.get('https://firestore.googleapis.com/v1/projects/ideafirebase-256b7/databases/(default)/documents/listMessages/')
+    // .subscribe((response: Response) => {
 
-      console.log('cek dl ya gans :: ', response)
-      return response.json();
-    });
+    //   console.log('cek dl ya gans :: ', response)
+    //   return response.json();
+    // });
       // .map((response: Response) => {
 
       //   console.log('cek dl ya gans :: ', response)

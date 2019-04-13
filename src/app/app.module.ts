@@ -35,6 +35,8 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
 import { HttpModule } from '@angular/http';
+import { LoaderProvider } from '../providers/loader/loader';
+import { PopupNotifProvider } from '../providers/popup-notif/popup-notif';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -98,7 +100,9 @@ const firebase = {
     Firebase,
     FcmProvider,
     AuthenticationService,
-    ProfileService
+    ProfileService,
+    LoaderProvider,
+    PopupNotifProvider
   ]
 })
 export class AppModule {}

@@ -11,9 +11,9 @@
         <img [src]="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSlq5OEUc3DfFtCtcSY6FBKfWO8rQ1cl0aFkp4mS-oTo9OGBMg3w'" />
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngFor="let profile of empProfile | async">
       <ion-col text-center>
-        Employee
+         : {{profile.message}}
       </ion-col>
     </ion-row>
     <ion-row>
@@ -22,6 +22,7 @@
       </ion-col>
 
     </ion-row>
+
 
   </ion-grid>
 </ion-content>

@@ -22,10 +22,11 @@ export class ProfilePage {
     private profileSvc: ProfileService) {
   }
 
+  empProfile : any;
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
 
-    this.profileSvc.fetchProfile();
+    this.empProfile = this.profileSvc.fetchProfile().valueChanges();
   }
 
 }
