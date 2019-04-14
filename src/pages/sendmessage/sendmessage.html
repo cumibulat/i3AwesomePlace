@@ -42,16 +42,17 @@
 
 
     <ion-list *ngSwitchCase="'listMessage'">
-      <ion-card *ngFor="let message of listMessage | async">
-        <ion-card-header>
-          <h2>{{ message.title }}</h2>
+      <ion-card *ngFor="let message of listMessage | async" class="cards-color-border">
+        <ion-card-header class="cards-list-demo">
+          {{ message.title }}
         </ion-card-header>
         <ion-card-content>
-          <h4>{{ message.message }}</h4>
-          <p>
-            <!-- <ion-datetime [(ngModel)]=""></ion-datetime> -->
+          <h2>{{ message.message }}</h2>
+
+          <p text-right>
+            {{message.sendDate.toDate() | date:'medium'}}
           </p>
-          {{message.sendDate.toDate()}}
+          
         </ion-card-content>
       
 
