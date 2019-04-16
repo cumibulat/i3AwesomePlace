@@ -1,3 +1,4 @@
+import { ProfileService } from './../services/profile';
 import { AuthenticationService } from './../services/authentication';
 import { AppRoutingModule } from './app-routing.module';
 import { FingerprintPage } from './../pages/fingerprint/fingerprint';
@@ -33,6 +34,9 @@ import { SendmessagePage } from '../pages/sendmessage/sendmessage';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
+import { HttpModule } from '@angular/http';
+import { LoaderProvider } from '../providers/loader/loader';
+import { PopupNotifProvider } from '../providers/popup-notif/popup-notif';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -60,6 +64,7 @@ const firebase = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(AwesomePlaces),
+    HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
     }),
@@ -94,7 +99,10 @@ const firebase = {
     GoogleMaps,
     Firebase,
     FcmProvider,
-    AuthenticationService
+    AuthenticationService,
+    ProfileService,
+    LoaderProvider,
+    PopupNotifProvider
   ]
 })
 export class AppModule {}

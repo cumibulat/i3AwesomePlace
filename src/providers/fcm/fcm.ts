@@ -70,4 +70,8 @@ export class FcmProvider {
     return this.firebaseNative.onNotificationOpen();
   }
 
+  fetchListMessage(){
+    return this.afs.collection('listMessages', ref => ref.orderBy("sendDate","desc"));
+  }
+
 }

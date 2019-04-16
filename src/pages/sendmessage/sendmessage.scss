@@ -1,3 +1,11 @@
 page-sendmessage {
+    .cards-list-demo {
+        color: map-get($colors, primarylight);
+        font-size: 22px; 
+        font-weight: bold;
+    }
 
+    .cards-color-border {
+        border-left: 10px solid map-get($colors, secondary);
+    }
 }
