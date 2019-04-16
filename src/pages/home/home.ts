@@ -23,6 +23,8 @@ import {
 import { NativeMapsPage } from '../native-maps/native-maps';
 import { SendmessagePage } from '../sendmessage/sendmessage';
 import { ProfilePage } from '../profile/profile';
+import { ChartingPage } from '../charting/charting';
+import { SubmitAbsencePage } from '../submit-absence/submit-absence';
 
 @Component({
   selector: 'page-home',
@@ -36,6 +38,9 @@ export class HomePage implements OnInit {
   sendMsgPage = SendmessagePage;
   loginPage = LoginPage;
   profilePage = ProfilePage;
+  chartPage = ChartingPage;
+  submitAbsencePage = SubmitAbsencePage;
+  
   places: Place[] = [];
   
   constructor(

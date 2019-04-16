@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Submit Absence</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Absence Start</ion-label>
+    <ion-datetime 
+      displayFormat="{{globalConstants.defaultDateFormat}}"
+      pickerFormat="{{globalConstants.defaultDateFormat}}" 
+      [(ngModel)]="event.absenceStart"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Absence End</ion-label>
+    <ion-datetime 
+      displayFormat="{{globalConstants.defaultDateFormat}}"
+      pickerFormat="{{globalConstants.defaultDateFormat}}" 
+      [(ngModel)]="event.absenceEnd"></ion-datetime>
+  </ion-item>
+
+</ion-content>

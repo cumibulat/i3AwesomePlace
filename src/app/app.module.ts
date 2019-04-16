@@ -37,6 +37,9 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HttpModule } from '@angular/http';
 import { LoaderProvider } from '../providers/loader/loader';
 import { PopupNotifProvider } from '../providers/popup-notif/popup-notif';
+import { ChartingPage } from '../pages/charting/charting';
+import { GlobalConstants } from './globalConstants';
+import { SubmitAbsencePage } from '../pages/submit-absence/submit-absence';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -59,11 +62,17 @@ const firebase = {
     SendmessagePage,
     LoginPage,
     RegisterPage, 
-    ProfilePage
+    ProfilePage,
+    ChartingPage,
+    SubmitAbsencePage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(AwesomePlaces),
+    IonicModule.forRoot(AwesomePlaces,
+      {
+        dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+        dayShortNames: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+      }),
     HttpModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
@@ -85,7 +94,9 @@ const firebase = {
     SendmessagePage,
     LoginPage,
     RegisterPage,
-    ProfilePage
+    ProfilePage,
+    ChartingPage,
+    SubmitAbsencePage
   ],
   providers: [
     StatusBar,
@@ -102,7 +113,8 @@ const firebase = {
     AuthenticationService,
     ProfileService,
     LoaderProvider,
-    PopupNotifProvider
+    PopupNotifProvider,
+    GlobalConstants
   ]
 })
 export class AppModule {}
