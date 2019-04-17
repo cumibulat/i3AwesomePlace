@@ -23,7 +23,6 @@ export class SubmitAbsencePage {
   formAbsence: FormGroup;
   submitAttempt: boolean = false;
 
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,11 +40,12 @@ export class SubmitAbsencePage {
   }
 
   onDateChanged() {
-    // console.log('jalan ni gan !!', this.frmAbsence);
+    if (this.formAbsence.get('dateStart').value !== '' && this.formAbsence.get('dateEnd').value !== '') {
 
-    // if (this.frmAbsence.dateStart != undefined && this.frmAbsence.dateEnd != undefined) {
+      console.log('jalan ga sih ?')
+      this.formAbsence.patchValue({duration: 3});
 
-    // }
+    }
   }
 
   doSubmit(){

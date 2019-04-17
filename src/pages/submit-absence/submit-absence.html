@@ -48,7 +48,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Duration</ion-label>
-        <h3>{{duration}}</h3>
+        <ion-input type="text" formControlName="duration" [readonly]="true"> </ion-input> 
       </ion-item>
       <ion-item>
         <ion-label>Remark</ion-label>
@@ -59,5 +59,4 @@
   </ion-list>
 
   <button ion-button color="primary" (click)="doSubmit()">Submit Absence </button>
-
 </ion-content>
