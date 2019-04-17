@@ -14,6 +14,7 @@ import { AddPlacePage } from '../pages/add-place/add-place';
 import { PlacePage } from '../pages/place/place';
 import { SetLocationPage } from '../pages/set-location/set-location';
 import { AgmCoreModule } from '@agm/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
@@ -69,6 +70,7 @@ const firebase = {
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(AwesomePlaces,
       {
         dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
