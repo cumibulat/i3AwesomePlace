@@ -23,17 +23,28 @@
         *ngIf="!formAbsence.controls.absenceType.valid && submitAttempt">
         <p>Absence Type is Mandatory.</p>
       </ion-item>
+
       <ion-item>
         <ion-label>Absence Start</ion-label>
         <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
           pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateStart"
-          (ionChange)="onDateChanged($event)"></ion-datetime>
+          (ionChange)="onDateChanged($event)"
+          [class.invalid]="!formAbsence.controls.dateStart.valid && submitAttempt"></ion-datetime>
+      </ion-item>
+      <ion-item
+        *ngIf="!formAbsence.controls.dateStart.valid && submitAttempt">
+        <p>Absence Start is Mandatory.</p>
       </ion-item>
       <ion-item>
         <ion-label>Absence End</ion-label>
         <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
           pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateEnd"
-          (ionChange)="onDateChanged($event)"></ion-datetime>
+          (ionChange)="onDateChanged($event)"
+          [class.invalid]="!formAbsence.controls.dateEnd.valid && submitAttempt"></ion-datetime>
+      </ion-item>
+      <ion-item
+        *ngIf="!formAbsence.controls.dateEnd.valid && submitAttempt">
+        <p>Absence End is Mandatory.</p>
       </ion-item>
       <ion-item>
         <ion-label>Duration</ion-label>
