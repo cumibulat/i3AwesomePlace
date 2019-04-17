@@ -40,6 +40,7 @@ import { PopupNotifProvider } from '../providers/popup-notif/popup-notif';
 import { ChartingPage } from '../pages/charting/charting';
 import { GlobalConstants } from './globalConstants';
 import { SubmitAbsencePage } from '../pages/submit-absence/submit-absence';
+import { AuthProvider } from '../providers/auth/auth';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -114,7 +115,8 @@ const firebase = {
     ProfileService,
     LoaderProvider,
     PopupNotifProvider,
-    GlobalConstants
+    GlobalConstants,
+    AuthProvider
   ]
 })
 export class AppModule {}

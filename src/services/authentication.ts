@@ -10,6 +10,7 @@ import {
 import {
   BehaviorSubject
 } from 'rxjs';
+import firebase from 'firebase';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -33,10 +34,14 @@ export class AuthenticationService {
     })
   }
 
-  login() {
-    return this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
-      this.authenticationState.next(true);
-    });
+  login(email: string, password: string) {
+    console.log('cek dl ya :: ', email);
+    console.log('cek dl ya :: password', password);
+
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.authenticationState.next(true);
+      });
   }
 
   logout() {
