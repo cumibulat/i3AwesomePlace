@@ -32,7 +32,6 @@ export class FcmProvider {
     if (this.platform.is('android')) {
       token = await this.firebaseNative.getToken();
     }
-
     if (this.platform.is('ios')) {
       token = await this.firebaseNative.getToken();
       await this.firebaseNative.grantPermission();
@@ -46,12 +45,10 @@ export class FcmProvider {
     if (!token) return;
 
     const devicesRef = this.afs.collection('devices');
-
     const docData = {
       token,
       userId: 'testUser',
     };
-
     return devicesRef.doc(token).set(docData);
   }
 
@@ -72,6 +69,16 @@ export class FcmProvider {
 
   fetchListMessage(){
     return this.afs.collection('listMessages', ref => ref.orderBy("sendDate","desc"));
+  }
+
+  saveDataToFirestore(collectionName, objData){
+    const listMessages = this.afs.collection(collectionName);
+    const tmpNow = new Date();
+    return listMessages.doc(tmpNow.getTime().toString()).set(objData);
+  }
+
+  getDataFromFirestore(collectionName){
+    return this.afs.collection(collectionName);
   }
 
 }

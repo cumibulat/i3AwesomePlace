@@ -12,6 +12,8 @@ import {
 import {
   FormBuilder, FormGroup, Validators
 } from '@angular/forms';
+import { FcmProvider } from '../../providers/fcm/fcm';
+import { LoaderProvider } from '../../providers/loader/loader';
 
 @IonicPage()
 @Component({
@@ -22,12 +24,16 @@ export class SubmitAbsencePage {
 
   formAbsence: FormGroup;
   submitAttempt: boolean = false;
+  segmentVal: string = "submitAbsence";
+  listAbsence: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private globalConstants: GlobalConstants,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private fcmProvider: FcmProvider,
+    private loader: LoaderProvider
   ) {
 
     this.formAbsence = formBuilder.group({
@@ -61,6 +67,8 @@ export class SubmitAbsencePage {
       console.log("success!")
       console.log(this.formAbsence.value);
 
+      this.fcmProvider.saveDataToFirestore('listAbsence', this.formAbsence.value);
+
     }
   }
 
@@ -79,8 +87,16 @@ export class SubmitAbsencePage {
     }
   }
 
+  segmentChanged(evt){
+    
+  }
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SubmitAbsencePage');
+    this.segmentVal = "submitAbsence";
+    this.loader.present("Getting list message..");
+    this.listAbsence = this.fcmProvider.getDataFromFirestore('listAbsence').valueChanges();
+    this.loader.dismiss();
+    // console.log('ini isinya :: ', this.fcmProvider.getDataFromFirestore('listAbsence').valueChanges());
   }
 
 }

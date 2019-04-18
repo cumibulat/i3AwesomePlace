@@ -5,62 +5,94 @@
 </ion-header>
 
 <ion-content padding>
-  <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
 
-  <ion-list lines="none">
+  <ion-segment [(ngModel)]="segmentVal" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="submitAbsence">
+      Submit Absence
+    </ion-segment-button>
+    <ion-segment-button value="listAbsence">
+      List Absence
+    </ion-segment-button>
+  </ion-segment>
 
-    <form [formGroup]="formAbsence">
-      <ion-item>
-        <ion-label>Absence Type</ion-label>
-        <ion-select formControlName="absenceType"
-        [class.invalid]="!formAbsence.controls.absenceType.valid && submitAttempt">
-          <ion-option value="Absence">Absence</ion-option>
-          <ion-option value="Sick">Sick</ion-option>
-          <ion-option value="Permission">Permission</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item
-        *ngIf="!formAbsence.controls.absenceType.valid && submitAttempt">
-        <p>Absence Type is Mandatory.</p>
-      </ion-item>
 
-      <ion-item>
-        <ion-label>Absence Start</ion-label>
-        <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
-          pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateStart"
-          (ionChange)="onDateChanged($event)"
-          [class.invalid]="!formAbsence.controls.dateStart.valid && submitAttempt"></ion-datetime>
-      </ion-item>
-      <ion-item
-        *ngIf="!formAbsence.controls.dateStart.valid && submitAttempt">
-        <p>Absence Start is Mandatory.</p>
-      </ion-item>
-      <ion-item>
-        <ion-label>Absence End</ion-label>
-        <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
-          pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateEnd"
-          (ionChange)="onDateChanged($event)"
-          [class.invalid]="!formAbsence.controls.dateEnd.valid && submitAttempt"></ion-datetime>
-      </ion-item>
-      <ion-item
-        *ngIf="!formAbsence.controls.dateEnd.valid && submitAttempt">
-        <p>Absence End is Mandatory.</p>
-      </ion-item>
-      <ion-item>
-        <ion-label>Duration</ion-label>
-        <ion-input type="text" formControlName="duration" [readonly]="true"> </ion-input> 
-      </ion-item>
-      <ion-item>
-        <ion-label>Remark</ion-label>
-        <ion-input formControlName="remark" type="text"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Attachment</ion-label>
-        <ion-input type="file" (change)="onFileChange($event)"></ion-input>
-      </ion-item>
+  <div [ngSwitch]="segmentVal">
+    <div *ngSwitchCase="'submitAbsence'">
+      <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
 
-    </form>
-  </ion-list>
+      <ion-list lines="none">
 
-  <button ion-button color="primary" (click)="doSubmit()">Submit Absence </button>
+        <form [formGroup]="formAbsence">
+          <ion-item>
+            <ion-label>Absence Type</ion-label>
+            <ion-select formControlName="absenceType"
+              [class.invalid]="!formAbsence.controls.absenceType.valid && submitAttempt">
+              <ion-option value="Absence">Absence</ion-option>
+              <ion-option value="Sick">Sick</ion-option>
+              <ion-option value="Permission">Permission</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item *ngIf="!formAbsence.controls.absenceType.valid && submitAttempt">
+            <p>Absence Type is Mandatory.</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Absence Start</ion-label>
+            <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
+              pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateStart"
+              (ionChange)="onDateChanged($event)"
+              [class.invalid]="!formAbsence.controls.dateStart.valid && submitAttempt"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="!formAbsence.controls.dateStart.valid && submitAttempt">
+            <p>Absence Start is Mandatory.</p>
+          </ion-item>
+          <ion-item>
+            <ion-label>Absence End</ion-label>
+            <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
+              pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateEnd"
+              (ionChange)="onDateChanged($event)"
+              [class.invalid]="!formAbsence.controls.dateEnd.valid && submitAttempt"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="!formAbsence.controls.dateEnd.valid && submitAttempt">
+            <p>Absence End is Mandatory.</p>
+          </ion-item>
+          <ion-item>
+            <ion-label>Duration</ion-label>
+            <ion-input type="text" formControlName="duration" [readonly]="true"> </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Remark</ion-label>
+            <ion-input formControlName="remark" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Attachment</ion-label>
+            <ion-input type="file" (change)="onFileChange($event)"></ion-input>
+          </ion-item>
+
+        </form>
+      </ion-list>
+
+      <button ion-button color="primary" (click)="doSubmit()">Submit Absence </button>
+    </div>
+
+    <ion-list *ngSwitchCase="'listAbsence'">
+      <ion-card *ngFor="let absence of listAbsence | async" class="cards-color-border">
+        <ion-card-header class="cards-list-demo">
+          {{ absence.absenceType }}
+        </ion-card-header>
+        <ion-card-content>
+          <h2>{{ absence.dateStart }} to {{ absence.dateEnd }} </h2>
+          <p text-right>
+            {{absence.attachmentName}}
+          </p>
+          <img src="data:image/png;base64,{{absence.attachmentBase64}}" />
+
+
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+
+  </div>
+
+
 </ion-content>
