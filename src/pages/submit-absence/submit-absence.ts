@@ -35,7 +35,10 @@ export class SubmitAbsencePage {
       dateEnd: ['', Validators.required],
       absenceType: ['', Validators.required],
       remark: ['', Validators.compose([Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-      duration: [0]
+      duration: [0],
+      attachmentName: [''],
+      attachmentMimeType: [''],
+      attachmentBase64: ['']
     });
   }
 
@@ -57,9 +60,24 @@ export class SubmitAbsencePage {
     else {
       console.log("success!")
       console.log(this.formAbsence.value);
-    }
 
-}
+    }
+  }
+
+  onFileChange(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.formAbsence.patchValue({
+          attachmentName: file.name,
+          attachmentMimeType: file.type,
+          attachmentBase64: (<string>reader.result).split(',')[1],
+        });
+      };
+    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SubmitAbsencePage');

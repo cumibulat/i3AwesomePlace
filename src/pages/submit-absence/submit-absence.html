@@ -54,6 +54,10 @@
         <ion-label>Remark</ion-label>
         <ion-input formControlName="remark" type="text"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>Attachment</ion-label>
+        <ion-input type="file" (change)="onFileChange($event)"></ion-input>
+      </ion-item>
 
     </form>
   </ion-list>
