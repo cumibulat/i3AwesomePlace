@@ -18,13 +18,13 @@
 
   <div [ngSwitch]="segmentVal">
     <div *ngSwitchCase="'submitAbsence'">
-      <p *ngIf="submitAttempt" style="color: #ea6153;">Please fill out all details accurately.</p>
+      <p *ngIf="submitAttempt" style="color: #ea6153;font-weight: bold;">Please fill out all details accurately.</p>
 
       <ion-list lines="none">
 
         <form [formGroup]="formAbsence">
           <ion-item>
-            <ion-label>Absence Type</ion-label>
+            <ion-label>Absence Type *</ion-label>
             <ion-select formControlName="absenceType"
               [class.invalid]="!formAbsence.controls.absenceType.valid && submitAttempt">
               <ion-option value="Absence">Absence</ion-option>
@@ -37,7 +37,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>Absence Start</ion-label>
+            <ion-label>Absence Start *</ion-label>
             <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
               pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateStart"
               (ionChange)="onDateChanged($event)"
@@ -47,7 +47,7 @@
             <p>Absence Start is Mandatory.</p>
           </ion-item>
           <ion-item>
-            <ion-label>Absence End</ion-label>
+            <ion-label>Absence End *</ion-label>
             <ion-datetime displayFormat="{{globalConstants.defaultDateFormat}}"
               pickerFormat="{{globalConstants.defaultDateFormat}}" formControlName="dateEnd"
               (ionChange)="onDateChanged($event)"
@@ -61,18 +61,25 @@
             <ion-input type="text" formControlName="duration" [readonly]="true"> </ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Remark</ion-label>
-            <ion-input formControlName="remark" type="text"></ion-input>
+            <ion-label>Remark *</ion-label>
+            <ion-textarea formControlName="remark" rows="5" maxLength="1000"
+              placeholder="Type Remark Here.."
+              [class.invalid]="!formAbsence.controls.remark.valid && submitAttempt"></ion-textarea>
+          </ion-item>
+          <ion-item *ngIf="!formAbsence.controls.remark.valid && submitAttempt">
+            <p>Remark is Mandatory.</p>
           </ion-item>
           <ion-item>
-            <ion-label>Attachment</ion-label>
+            <ion-label>Attachment *</ion-label>
             <ion-input type="file" (change)="onFileChange($event)"></ion-input>
           </ion-item>
-
+          <ion-item>
+            <button ion-button color="secondary" block (click)="doSubmit()">Submit Absence </button>
+          </ion-item>
         </form>
       </ion-list>
 
-      <button ion-button color="primary" (click)="doSubmit()">Submit Absence </button>
+      
     </div>
 
     <ion-list *ngSwitchCase="'listAbsence'">

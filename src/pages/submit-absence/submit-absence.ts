@@ -14,6 +14,8 @@ import {
 } from '@angular/forms';
 import { FcmProvider } from '../../providers/fcm/fcm';
 import { LoaderProvider } from '../../providers/loader/loader';
+import { PopupNotifProvider } from '../../providers/popup-notif/popup-notif';
+import { map } from 'rxjs-compat/operators/map';
 
 @IonicPage()
 @Component({
@@ -33,7 +35,8 @@ export class SubmitAbsencePage {
     private globalConstants: GlobalConstants,
     private formBuilder: FormBuilder,
     private fcmProvider: FcmProvider,
-    private loader: LoaderProvider
+    private loader: LoaderProvider,
+    private popupNotif: PopupNotifProvider
   ) {
 
     this.formAbsence = formBuilder.group({
@@ -58,17 +61,23 @@ export class SubmitAbsencePage {
   }
 
   doSubmit(){
-
     this.submitAttempt = true;
 
     if(!this.formAbsence.valid){
     } 
     else {
-      console.log("success!")
-      console.log(this.formAbsence.value);
-
-      this.fcmProvider.saveDataToFirestore('listAbsence', this.formAbsence.value);
-
+      this.loader.present("Submitting Absence Data ..");
+      this.fcmProvider.saveDataToFirestore('listAbsence', this.formAbsence.value)
+      .then(() => {
+        this.loader.dismiss();
+        this.submitAttempt = false;
+        this.popupNotif.show("Success", "Submit Absence Data Success.", ["Close"]);
+        this.formAbsence.reset();
+      }, 
+      error => {
+        this.loader.dismiss();
+        this.popupNotif.show("Error", "Submit Absence Data Failed.", ["Close"]);
+      });
     }
   }
 
@@ -88,15 +97,44 @@ export class SubmitAbsencePage {
   }
 
   segmentChanged(evt){
+    if(evt.value == 'listAbsence') {
+      //need to refresh our list 
+      this.refreshListAbsence();
+    }
+  }
+
+  refreshListAbsence(){
+    this.loader.present("Getting list Absence..");
+    const tmpCollection = this.fcmProvider.getDataFromFirestore('listAbsence');
+ 
+    console.log('refreshListAbsence !!!')
+
+    this.listAbsence = tmpCollection.snapshotChanges().pipe(
+      map((actions:any) => {
+        return actions.map((a:any) => {
+          const data = a.payload.doc.data() ;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      })
+    );
+
+    // this.listAbsence.subscribe( (xx) => {
+    //   console.log('cek ye gan isi :: ', xx)
+      
+    // })
+    // ;
+
+    // this.listAbsence.valueChanges().subscribe((vv) => {
+    //   console.log('hasil :: ', vv)
+    // })
     
+    this.loader.dismiss();
   }
 
   ionViewDidLoad() {
     this.segmentVal = "submitAbsence";
-    this.loader.present("Getting list message..");
-    this.listAbsence = this.fcmProvider.getDataFromFirestore('listAbsence').valueChanges();
-    this.loader.dismiss();
-    // console.log('ini isinya :: ', this.fcmProvider.getDataFromFirestore('listAbsence').valueChanges());
+    this.refreshListAbsence();
   }
 
 }

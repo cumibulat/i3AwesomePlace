@@ -10,9 +10,7 @@ import {
 import {
   AngularFirestore
 } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
 
-import { map } from 'rxjs-compat/operators/map';
 
 @Injectable()
 export class FcmProvider {
@@ -59,7 +57,7 @@ export class FcmProvider {
     const tmpNow = new Date();
     tmpMsg.sendDate = tmpNow;
 
-    return listMessages.doc(tmpNow.getTime().toString()).set(tmpMsg);
+    return listMessages.add(tmpMsg);
   }
 
   // Listen to incoming FCM messages
@@ -74,7 +72,8 @@ export class FcmProvider {
   saveDataToFirestore(collectionName, objData){
     const listMessages = this.afs.collection(collectionName);
     const tmpNow = new Date();
-    return listMessages.doc(tmpNow.getTime().toString()).set(objData);
+    objData.createdDate = tmpNow;
+    return listMessages.add(objData);
   }
 
   getDataFromFirestore(collectionName){
