@@ -118,12 +118,6 @@ export class SubmitAbsencePage {
       })
     );
 
-    // this.listAbsence.subscribe( (xx) => {
-    //   console.log('cek ye gan isi :: ', xx)
-      
-    // })
-    // ;
-
     // this.listAbsence.valueChanges().subscribe((vv) => {
     //   console.log('hasil :: ', vv)
     // })

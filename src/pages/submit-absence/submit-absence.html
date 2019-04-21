@@ -33,7 +33,7 @@
             </ion-select>
           </ion-item>
           <ion-item *ngIf="!formAbsence.controls.absenceType.valid && submitAttempt">
-            <p>Absence Type is Mandatory.</p>
+            <p class="form-warning">Absence Type is Mandatory.</p>
           </ion-item>
 
           <ion-item>
@@ -44,7 +44,7 @@
               [class.invalid]="!formAbsence.controls.dateStart.valid && submitAttempt"></ion-datetime>
           </ion-item>
           <ion-item *ngIf="!formAbsence.controls.dateStart.valid && submitAttempt">
-            <p>Absence Start is Mandatory.</p>
+            <p class="form-warning">Absence Start is Mandatory.</p>
           </ion-item>
           <ion-item>
             <ion-label>Absence End *</ion-label>
@@ -54,7 +54,7 @@
               [class.invalid]="!formAbsence.controls.dateEnd.valid && submitAttempt"></ion-datetime>
           </ion-item>
           <ion-item *ngIf="!formAbsence.controls.dateEnd.valid && submitAttempt">
-            <p>Absence End is Mandatory.</p>
+            <p class="form-warning">Absence End is Mandatory.</p>
           </ion-item>
           <ion-item>
             <ion-label>Duration</ion-label>
@@ -67,7 +67,7 @@
               [class.invalid]="!formAbsence.controls.remark.valid && submitAttempt"></ion-textarea>
           </ion-item>
           <ion-item *ngIf="!formAbsence.controls.remark.valid && submitAttempt">
-            <p>Remark is Mandatory.</p>
+            <p class="form-warning">Remark is Mandatory.</p>
           </ion-item>
           <ion-item>
             <ion-label>Attachment *</ion-label>
@@ -83,8 +83,8 @@
     </div>
 
     <ion-list *ngSwitchCase="'listAbsence'">
-      <ion-card *ngFor="let absence of listAbsence | async" class="cards-color-border">
-        <ion-card-header class="cards-list-demo">
+      <ion-card *ngFor="let absence of listAbsence | async" >
+        <ion-card-header >
           {{ absence.absenceType }}
         </ion-card-header>
         <ion-card-content>
@@ -93,7 +93,7 @@
             {{absence.attachmentName}}
           </p>
           <img src="data:image/png;base64,{{absence.attachmentBase64}}" /> -->
-
+          <p>{{absence.remark}}</p>
 
         </ion-card-content>
       </ion-card>
