@@ -12,7 +12,7 @@ admin.initializeApp();
 
 exports.addMessage = functions.https.onRequest((req, res) => {
 
-  console.log('tes ye gan addMessage!!')
+  // console.log('tes ye gan addMessage!!')
   // Grab the text parameter.
   const original = req.query.text;
   // Push the new message into the Realtime Database using the Firebase Admin SDK.
@@ -80,7 +80,7 @@ exports.pushNewMessage = functions.firestore
       }
     }
 
-    console.log('cek dl gans :: ', payload);
+    // console.log('cek dl gans :: ', payload);
 
     // ref to the device collection for the user
     const db = admin.firestore()

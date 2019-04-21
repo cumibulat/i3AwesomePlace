@@ -24,8 +24,6 @@ export class ProfilePage {
 
   empProfile : any;
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-
     this.empProfile = this.profileSvc.fetchProfile().valueChanges();
   }
 

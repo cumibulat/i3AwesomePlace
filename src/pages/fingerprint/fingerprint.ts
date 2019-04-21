@@ -29,7 +29,7 @@ export class FingerprintPage {
     this.faio.isAvailable()
       .then(
         () => {
-          console.log('yes device have fingerprint !! ');
+          // console.log('yes device have fingerprint !! ');
           this.faio.show({
               clientId: 'Fingerprint-Demo',
               clientSecret: 'password', //Only necessary for Android
@@ -38,7 +38,7 @@ export class FingerprintPage {
               localizedReason: 'Please authenticate' //Only for iOS
             })
             .then((result: any) => {
-              console.log(result);
+              // console.log(result);
               const toast = this.toastCtrl.create({
                 message: 'Fingerprint recognized..',
                 duration: 5000,
@@ -47,7 +47,7 @@ export class FingerprintPage {
               this.message = "Fingerprint recognized.. You can continue use apps !";
             })
             .catch((error: any) => {
-              console.log(error);
+              // console.log(error);
               // const toast = this.toastCtrl.create({
               //   message: 'Error authenticate fingerprint..',
               //   duration: 2500,

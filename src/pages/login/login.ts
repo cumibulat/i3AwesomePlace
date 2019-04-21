@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RegisterPage } from '../register/register';
+import { PopupNotifProvider } from '../../providers/popup-notif/popup-notif';
+
 
 @Component({
   selector: 'page-login',
@@ -15,24 +17,31 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private authService: AuthenticationService,
-    private loader: LoaderProvider
+    private loader: LoaderProvider,
+    private popupNotif: PopupNotifProvider
     ) {
   }
 
   login(form: NgForm){
-    console.log('test jalan gan !!', form);
     this.loader.present("Signing In..");
-    this.authService.login(form.value.email, form.value.password);
+    this.authService.login(form.value.email, form.value.password)
+    .then((user) => {
+      this.authService.setAuthenticated();
+      this.loader.dismiss();
+      this.popupNotif.show("Success", "Welcome, " + user.user.email, ["Close"]);
+    })
+    .catch((err) => {
+      this.loader.dismiss();
+      this.popupNotif.show("Error", err.message, ["Close"]);
+    });
     this.loader.dismiss();
   }
 
   goToRegister(){
-    console.log('jalan ga ni')
     this.navCtrl.push(RegisterPage);
   }
   
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
 }

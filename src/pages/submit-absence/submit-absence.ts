@@ -73,11 +73,13 @@ export class SubmitAbsencePage {
         this.submitAttempt = false;
         this.popupNotif.show("Success", "Submit Absence Data Success.", ["Close"]);
         this.formAbsence.reset();
-      }, 
-      error => {
-        this.loader.dismiss();
-        this.popupNotif.show("Error", "Submit Absence Data Failed.", ["Close"]);
-      });
+      })
+      .catch( 
+        error => {
+          this.loader.dismiss();
+          this.popupNotif.show("Error", "Submit Absence Data Failed.", ["Close"]);
+        }
+      );
     }
   }
 
@@ -106,9 +108,6 @@ export class SubmitAbsencePage {
   refreshListAbsence(){
     this.loader.present("Getting list Absence..");
     const tmpCollection = this.fcmProvider.getDataFromFirestore('listAbsence');
- 
-    console.log('refreshListAbsence !!!')
-
     this.listAbsence = tmpCollection.snapshotChanges().pipe(
       map((actions:any) => {
         return actions.map((a:any) => {
@@ -134,7 +133,6 @@ export class SubmitAbsencePage {
 
   ionViewDidLoad() {
     this.segmentVal = "submitAbsence";
-    this.refreshListAbsence();
   }
 
 }

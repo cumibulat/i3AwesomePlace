@@ -10,7 +10,7 @@ import {
 import {
   AngularFirestore
 } from 'angularfire2/firestore';
-
+import firebase from 'firebase';
 
 @Injectable()
 export class FcmProvider {
@@ -20,7 +20,6 @@ export class FcmProvider {
     public afs: AngularFirestore,
     private platform: Platform
   ) {
-    console.log('Hello FcmProvider Provider');
   }
 
   // Get permission from the user
@@ -56,7 +55,7 @@ export class FcmProvider {
     const tmpMsg = msg;
     const tmpNow = new Date();
     tmpMsg.sendDate = tmpNow;
-
+    tmpMsg.createdBy = firebase.auth().currentUser.uid;
     return listMessages.add(tmpMsg);
   }
 
@@ -73,6 +72,7 @@ export class FcmProvider {
     const listMessages = this.afs.collection(collectionName);
     const tmpNow = new Date();
     objData.createdDate = tmpNow;
+    objData.createdBy = firebase.auth().currentUser.uid;
     return listMessages.add(objData);
   }
 

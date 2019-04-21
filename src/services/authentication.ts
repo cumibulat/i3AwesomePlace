@@ -13,6 +13,7 @@ import {
 import firebase from 'firebase';
 
 const TOKEN_KEY = 'auth-token';
+// const USER = 'xx'
 
 
 @Injectable()
@@ -35,19 +36,18 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    console.log('cek dl ya :: ', email);
-    console.log('cek dl ya :: password', password);
-
-    return firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.authenticationState.next(true);
-      });
+    return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
+      firebase.auth().signOut();
       this.authenticationState.next(false);
     });
+  }
+
+  setAuthenticated() {
+    this.authenticationState.next(true);
   }
 
   isAuthenticated() {
