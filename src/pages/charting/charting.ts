@@ -17,7 +17,7 @@ import {
 @IonicPage()
 @Component({
   selector: 'page-charting',
-  templateUrl: 'charting.html',
+  templateUrl: './charting.html',
 })
 export class ChartingPage {
 
