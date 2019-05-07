@@ -31,7 +31,6 @@ export class ChartingPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     private globalConstants: GlobalConstants
   ) {}
 
