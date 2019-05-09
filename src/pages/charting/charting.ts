@@ -25,9 +25,9 @@ export class ChartingPage {
   @ViewChild('doughnutCanvas') doughnutCanvas;
   @ViewChild('lineCanvas') lineCanvas;
 
-  barChart: any;
-  doughnutChart: any;
-  lineChart: any;
+  barChart: Chart;
+  doughnutChart: Chart;
+  lineChart: Chart;
 
   constructor(
     public navCtrl: NavController,
