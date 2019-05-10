@@ -42,6 +42,7 @@ import { ChartingPage } from '../pages/charting/charting';
 import { GlobalConstants } from './globalConstants';
 import { SubmitAbsencePage } from '../pages/submit-absence/submit-absence';
 import { AuthProvider } from '../providers/auth/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -118,7 +119,8 @@ const firebase = {
     LoaderProvider,
     PopupNotifProvider,
     GlobalConstants,
-    AuthProvider
+    AuthProvider,
+    AngularFireAuth
   ]
 })
 export class AppModule {}

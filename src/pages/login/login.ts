@@ -1,7 +1,7 @@
 import { LoaderProvider } from './../../providers/loader/loader';
 import { AuthenticationService } from './../../services/authentication';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { NgForm } from '@angular/forms';
 import { RegisterPage } from '../register/register';
 import { PopupNotifProvider } from '../../providers/popup-notif/popup-notif';
@@ -15,7 +15,6 @@ export class LoginPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
     private authService: AuthenticationService,
     private loader: LoaderProvider,
     private popupNotif: PopupNotifProvider
@@ -34,7 +33,7 @@ export class LoginPage {
       this.loader.dismiss();
       this.popupNotif.show("Error", err.message, ["Close"]);
     });
-    this.loader.dismiss();
+    // this.loader.dismiss();
   }
 
   goToRegister(){

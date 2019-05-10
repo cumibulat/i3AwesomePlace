@@ -10,7 +10,7 @@ import {
 import {
   BehaviorSubject
 } from 'rxjs';
-import firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 const TOKEN_KEY = 'auth-token';
 // const USER = 'xx'
@@ -21,7 +21,10 @@ export class AuthenticationService {
 
   authenticationState = new BehaviorSubject(false);
 
-  constructor(private storage: Storage, private plt: Platform) {
+  constructor(
+      private storage: Storage, 
+      private plt: Platform,
+      private afAuth: AngularFireAuth) {
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -36,12 +39,12 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string) {
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
-      firebase.auth().signOut();
+      this.afAuth.auth.signOut();
       this.authenticationState.next(false);
     });
   }

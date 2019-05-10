@@ -23,13 +23,25 @@ import {
   NavController,
   Platform,
   NavParams,
+  LoadingController,
+  AlertController,
+  GestureController,
 }                                   from 'ionic-angular';
 import { ConfigMock, PlatformMock } from 'ionic-mocks';
 import { GlobalConstants } from './app/globalConstants';
+import { AuthenticationService } from './services/authentication';
 // import { ClickersServiceMock }      from './services/clickers.mock';
 // import { ClickersService }          from './services';
 // import { TranslateServiceMock }     from './services/translate.mock';
 // import { TranslatePipeMock }        from './pipes/translate.pipe.mock';
+
+import {
+  Storage, IonicStorageModule
+} from '@ionic/storage';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireModule } from 'angularfire2';
+import { LoaderProvider } from './providers/loader/loader';
+import { PopupNotifProvider } from './providers/popup-notif/popup-notif';
 
 declare const require: any;
 
@@ -42,6 +54,15 @@ getTestBed().initTestEnvironment(
 const context: any = require.context('./', true, /\.spec\.ts$/);
 // And load the modules.
 context.keys().map(context);
+
+const firebase = {
+  apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
+  authDomain: "ideafirebase-256b7.firebaseapp.com",
+  databaseURL: "https://ideafirebase-256b7.firebaseio.com",
+  projectId: "ideafirebase-256b7",
+  storageBucket: "ideafirebase-256b7.appspot.com",
+  messagingSenderId: "341397938822"
+ }
 
 export class TestUtils {
 
@@ -63,7 +84,9 @@ export class TestUtils {
         // TranslatePipeMock,
       ],
       providers: [
-        App, Form, Keyboard, DomController, MenuController, NavController, GlobalConstants,
+        App, Form, Keyboard, DomController, MenuController, NavController, 
+          GlobalConstants, AuthenticationService, AngularFireAuth, LoaderProvider,
+          LoadingController, PopupNotifProvider, AlertController,GestureController,
         {provide: Platform, useFactory: () => PlatformMock.instance()},
         {provide: Config, useFactory: () => ConfigMock.instance()},
         {provide: DeepLinker, useFactory: () => ConfigMock.instance()},
@@ -74,6 +97,8 @@ export class TestUtils {
         FormsModule,
         IonicModule,
         ReactiveFormsModule,
+        IonicStorageModule.forRoot(),
+        AngularFireModule.initializeApp(firebase), 
         // TranslateModule,
       ],
     });
