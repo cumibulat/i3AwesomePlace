@@ -13,14 +13,20 @@ import {
   DebugElement
 } from '@angular/core';
 import {
-  By
-} from '@angular/platform-browser';
+  AuthenticationService
+} from '../../services/authentication';
+import {
+  NgForm
+} from '@angular/forms';
 
 let fixture: ComponentFixture < LoginPage > = null;
 let instance: any = null;
 let comp: LoginPage;
 let de: DebugElement;
+let authSvc: AuthenticationService;
+
 let el: HTMLElement;
+
 
 describe('Pages: LoginPage', () => {
 
@@ -29,6 +35,7 @@ describe('Pages: LoginPage', () => {
     instance = compiled.instance;
     comp = fixture.componentInstance;
 
+    authSvc = TestBed.get(AuthenticationService);
   })));
 
   it('should create the login page', async (() => {
@@ -39,16 +46,35 @@ describe('Pages: LoginPage', () => {
     expect(comp).toBeTruthy();
   }));
 
-//   it('can set the title to a supplied value', () => {
+  it('should do login successfully', () => {
+    // spyOn(authSvc, 'login').and.callThrough().and.returnValue(of({'status': 'training'}));
+    const spy = spyOn(authSvc, 'login').and.callThrough();
 
-//     de = fixture.debugElement.query(By.css('ion-card-header'));
-//     el = de.nativeElement;
 
-//     comp.ionViewDidLoad();
-//     fixture.detectChanges();
+    const xxForm = < NgForm > {
+      value: {
+        email: "Hello",
+        password: "World"
+      }
+    };
 
-//     expect(el.textContent).toContain('Bar Chart');
+    comp.login(xxForm);
 
-//   });
+    expect(authSvc.login).toHaveBeenCalled();
+
+  });
+
+
+  //   it('can set the title to a supplied value', () => {
+
+  //     de = fixture.debugElement.query(By.css('ion-card-header'));
+  //     el = de.nativeElement;
+
+  //     comp.ionViewDidLoad();
+  //     fixture.detectChanges();
+
+  //     expect(el.textContent).toContain('Bar Chart');
+
+  //   });
 
 });

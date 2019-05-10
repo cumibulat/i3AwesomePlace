@@ -27,7 +27,7 @@ import {
   AlertController,
   GestureController,
 }                                   from 'ionic-angular';
-import { ConfigMock, PlatformMock } from 'ionic-mocks';
+import { ConfigMock, PlatformMock, LoadingControllerMock } from 'ionic-mocks';
 import { GlobalConstants } from './app/globalConstants';
 import { AuthenticationService } from './services/authentication';
 // import { ClickersServiceMock }      from './services/clickers.mock';
@@ -42,6 +42,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireModule } from 'angularfire2';
 import { LoaderProvider } from './providers/loader/loader';
 import { PopupNotifProvider } from './providers/popup-notif/popup-notif';
+// import { LoadingControllerMock } from '../services/LoadingControllerMock';
 
 declare const require: any;
 
@@ -86,10 +87,11 @@ export class TestUtils {
       providers: [
         App, Form, Keyboard, DomController, MenuController, NavController, 
           GlobalConstants, AuthenticationService, AngularFireAuth, LoaderProvider,
-          LoadingController, PopupNotifProvider, AlertController,GestureController,
+          PopupNotifProvider, AlertController,GestureController,
         {provide: Platform, useFactory: () => PlatformMock.instance()},
         {provide: Config, useFactory: () => ConfigMock.instance()},
         {provide: DeepLinker, useFactory: () => ConfigMock.instance()},
+        {provide: LoadingController, useFactory: () => LoadingControllerMock.instance()},
         // {provide: ClickersService, useClass: ClickersServiceMock},
         // {provide: TranslateService, useClass: TranslateServiceMock},
       ],
