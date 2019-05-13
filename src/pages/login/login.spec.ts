@@ -48,7 +48,7 @@ describe('Pages: LoginPage', () => {
 
   it('should do login successfully', () => {
     // spyOn(authSvc, 'login').and.callThrough().and.returnValue(of({'status': 'training'}));
-    const spy = spyOn(authSvc, 'login').and.callThrough();
+    spyOn(authSvc, 'login').and.callThrough();
 
 
     const xxForm = < NgForm > {
@@ -64,17 +64,16 @@ describe('Pages: LoginPage', () => {
 
   });
 
+  it('should go to register page', () => {
 
-  //   it('can set the title to a supplied value', () => {
+    spyOn(comp, 'goToRegister');
 
-  //     de = fixture.debugElement.query(By.css('ion-card-header'));
-  //     el = de.nativeElement;
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
 
-  //     comp.ionViewDidLoad();
-  //     fixture.detectChanges();
-
-  //     expect(el.textContent).toContain('Bar Chart');
-
-  //   });
+    fixture.whenStable().then(() => {
+      expect(comp.goToRegister).toHaveBeenCalled();
+    });
+  });
 
 });
