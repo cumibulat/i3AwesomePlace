@@ -1,6 +1,6 @@
 export class LoadingControllerMock {
     _getPortal(): any { return {} };
-    create(options?: any) { 
+    create() : any { 
         return new LoadingMock()
     };
 }

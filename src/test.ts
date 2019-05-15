@@ -42,7 +42,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireModule } from 'angularfire2';
 import { LoaderProvider } from './providers/loader/loader';
 import { PopupNotifProvider } from './providers/popup-notif/popup-notif';
-// import { LoadingControllerMock } from '../services/LoadingControllerMock';
+// import { LoadingControllerMock } from './services/loading.mock';
 
 declare const require: any;
 

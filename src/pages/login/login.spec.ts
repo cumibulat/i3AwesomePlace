@@ -18,6 +18,9 @@ import {
 import {
   NgForm
 } from '@angular/forms';
+import {
+  By
+} from '@angular/platform-browser';
 
 let fixture: ComponentFixture < LoginPage > = null;
 let instance: any = null;
@@ -50,7 +53,6 @@ describe('Pages: LoginPage', () => {
     // spyOn(authSvc, 'login').and.callThrough().and.returnValue(of({'status': 'training'}));
     spyOn(authSvc, 'login').and.callThrough();
 
-
     const xxForm = < NgForm > {
       value: {
         email: "Hello",
@@ -59,21 +61,23 @@ describe('Pages: LoginPage', () => {
     };
 
     comp.login(xxForm);
-
     expect(authSvc.login).toHaveBeenCalled();
-
   });
 
   it('should go to register page', () => {
-
     spyOn(comp, 'goToRegister');
+    comp.goToRegister();
+    expect(comp.goToRegister).toHaveBeenCalled();
+  });
 
-    let button = fixture.debugElement.nativeElement.querySelector('button');
+  it('should call register page and triggered by button click', async(() => {
+    spyOn(comp, 'goToRegister');
+    let button = fixture.debugElement.nativeElement.querySelector('a');
     button.click();
-
+    
     fixture.whenStable().then(() => {
       expect(comp.goToRegister).toHaveBeenCalled();
     });
-  });
+  }));
 
 });

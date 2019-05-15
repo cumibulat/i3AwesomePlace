@@ -37,6 +37,7 @@ export class LoginPage {
   }
 
   goToRegister(){
+    console.log('test dl gan!!');
     this.navCtrl.push(RegisterPage);
   }
   
