@@ -1,3 +1,11 @@
+import { ChartingPageModule } from './../pages/charting/charting.module';
+import { ProfilePageModule } from './../pages/profile/profile.module';
+import { LoginPageModule } from './../pages/login/login.module';
+import { SendmessagePageModule } from './../pages/sendmessage/sendmessage.module';
+import { FingerprintPageModule } from './../pages/fingerprint/fingerprint.module';
+import { SetLocationPageModule } from './../pages/set-location/set-location.module';
+import { PlacePageModule } from './../pages/place/place.module';
+import { AddPlacePageModule } from './../pages/add-place/add-place.module';
 import { ProfileService } from './../services/profile';
 import { AuthenticationService } from './../services/authentication';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +51,9 @@ import { GlobalConstants } from './globalConstants';
 import { SubmitAbsencePage } from '../pages/submit-absence/submit-absence';
 import { AuthProvider } from '../providers/auth/auth';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { NativeMapsPageModule } from '../pages/native-maps/native-maps.module';
+import { RegisterPageModule } from '../pages/register/register.module';
+import { SubmitAbsencePageModule } from '../pages/submit-absence/submit-absence.module';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -57,17 +68,17 @@ const firebase = {
   declarations: [
     AwesomePlaces,
     HomePage,
-    AddPlacePage,
-    PlacePage,
-    SetLocationPage,
-    NativeMapsPage,
-    FingerprintPage,
-    SendmessagePage,
-    LoginPage,
-    RegisterPage, 
-    ProfilePage,
-    ChartingPage,
-    SubmitAbsencePage
+    // AddPlacePage,
+    // PlacePage,
+    // SetLocationPage,
+    // NativeMapsPage,
+    // FingerprintPage,
+    // SendmessagePage,
+    // LoginPage,
+    // RegisterPage, 
+    // ProfilePage,
+    // ChartingPage,
+    // SubmitAbsencePage
   ],
   imports: [
     BrowserModule,
@@ -84,7 +95,18 @@ const firebase = {
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebase), 
     AngularFirestoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AddPlacePageModule,
+    PlacePageModule,
+    SetLocationPageModule,
+    NativeMapsPageModule,
+    FingerprintPageModule,
+    SendmessagePageModule,
+    LoginPageModule,
+    RegisterPageModule,
+    ProfilePageModule,
+    ChartingPageModule,
+    SubmitAbsencePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
