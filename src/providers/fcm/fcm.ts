@@ -10,7 +10,9 @@ import {
 import {
   AngularFirestore
 } from 'angularfire2/firestore';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+
 
 @Injectable()
 export class FcmProvider {
