@@ -54,6 +54,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { NativeMapsPageModule } from '../pages/native-maps/native-maps.module';
 import { RegisterPageModule } from '../pages/register/register.module';
 import { SubmitAbsencePageModule } from '../pages/submit-absence/submit-absence.module';
+import { BestSellerPageModule } from '../pages/best-seller/best-seller.module';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -106,7 +107,8 @@ const firebase = {
     RegisterPageModule,
     ProfilePageModule,
     ChartingPageModule,
-    SubmitAbsencePageModule
+    SubmitAbsencePageModule,
+    BestSellerPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

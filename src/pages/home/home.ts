@@ -25,6 +25,7 @@ import { SendmessagePage } from '../sendmessage/sendmessage';
 import { ProfilePage } from '../profile/profile';
 import { ChartingPage } from '../charting/charting';
 import { SubmitAbsencePage } from '../submit-absence/submit-absence';
+import { BestSellerPage } from '../best-seller/best-seller';
 
 @Component({
   selector: 'page-home',
@@ -40,6 +41,7 @@ export class HomePage implements OnInit {
   profilePage = ProfilePage;
   chartPage = ChartingPage;
   submitAbsencePage = SubmitAbsencePage;
+  bestSellerPage = BestSellerPage;
   
   places: Place[] = [];
   
