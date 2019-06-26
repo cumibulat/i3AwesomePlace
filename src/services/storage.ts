@@ -7,9 +7,6 @@ import {
 import {
   Observable, BehaviorSubject
 } from 'rxjs';
-import {
-  map
-} from 'rxjs-compat/operators/map';
 
 
 @Injectable()
@@ -17,10 +14,6 @@ export class StorageService {
 
   private storageObserver: any;
   public storageObs: any;
-
-
-  public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
 
   constructor(private storage: Storage) {
     this.storageObserver = null;
@@ -40,9 +33,4 @@ export class StorageService {
     // Notify to the subscriptor that the value has changed
     this.storageObserver.next(this.storage);
   }
-
-  public updateCount(value: number):void {
-    this.countShoppingCart.next(value);
-  }
-
 }

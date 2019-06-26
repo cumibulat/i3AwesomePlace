@@ -21,4 +21,16 @@ page-best-seller {
         border-style: solid;
         border-color: map-get($colors, grey);
     }
+    .cart-text{
+        font-size: 12px;
+        font-weight: bold;
+        color: map-get($colors, primary);
+        margin: 5px 0 0 0;
+    }
+    .cart-highlight{
+        font-size: 14px;
+        font-weight: bold;
+        color: map-get($colors, secondary);
+        margin: 5px 0 0 0;
+    }
 }

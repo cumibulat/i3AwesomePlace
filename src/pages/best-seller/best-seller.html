@@ -9,9 +9,15 @@
   <div>
     <ion-grid>
 
-      <ion-row>
+      <ion-row *ngIf="cntShoppingCart > 0"> 
         <ion-col>
-          Ada jumlah item : {{cntShoppingCart}}
+          <div class="cart-text">
+              You have 
+              <span class="cart-highlight">{{cntShoppingCart}}</span> item(s) in Cart 
+          </div>
+        </ion-col>
+        <ion-col>
+          <button ion-button inline-block small float-right>Checkout</button>
         </ion-col>
       </ion-row>
       

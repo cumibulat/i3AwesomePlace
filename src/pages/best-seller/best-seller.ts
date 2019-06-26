@@ -22,6 +22,7 @@ import {
   Product
 } from '../../models/product';
 import { ProductService } from '../../services/product';
+import { ShoppingCartService } from '../../services/shoppingCart';
 
 /**
  * Generated class for the BestSellerPage page.
@@ -46,7 +47,8 @@ export class BestSellerPage {
     private storage: Storage,
     private storageService: StorageService,
     private http: HttpClient,
-    private productSvc: ProductService) {
+    private productSvc: ProductService,
+    private shoppingCartSvc: ShoppingCartService) {
 
     // this.storageService.storageObs.subscribe((newValue) => {
     //   // This code will execute when the property has changed and also
@@ -59,23 +61,12 @@ export class BestSellerPage {
     // });
 
 
-    this.storageService.countShoppingCart.subscribe((data) => {
-      this.cntShoppingCart = data;
-    });
-
-    this.productSvc.fetchBestSeller()
-    .subscribe((listProduct: ListProduct) => {
-      
-      this.listBestSeller = listProduct.data;
-
-      console.log('cek 555 : ', this.listBestSeller);
-    });
+    
   }
 
 
   addToCart(id: number) {
-    console.log('addToCart id : ', id);
-    const dt = new Date();
+    // const dt = new Date();
     // this.storage.get('localShoppingCart').then(res => {
     //   console.log('ini apa ? ', res);
 
@@ -90,13 +81,24 @@ export class BestSellerPage {
 
     // })
 
-    this.storageService.updateCount(Math.floor(Math.random() * 10));
+    // this.storageService.updateCount(Math.floor(Math.random() * 10));
+
+    this.shoppingCartSvc.addToShoppingCart(id);
 
 
   }
 
   ionViewDidLoad() {
-    
+    this.shoppingCartSvc.countShoppingCart.subscribe((data) => {
+      this.cntShoppingCart = data;
+    });
+
+    this.productSvc.fetchBestSeller()
+    .subscribe((listProduct: ListProduct) => {
+      this.listBestSeller = listProduct.data;
+    });
+
+    this.shoppingCartSvc.refreshCart();
   }
 
 }

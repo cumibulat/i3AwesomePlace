@@ -57,6 +57,7 @@ import { BestSellerPageModule } from '../pages/best-seller/best-seller.module';
 import { StorageService } from '../services/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../services/product';
+import { ShoppingCartService } from '../services/shoppingCart';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -148,7 +149,8 @@ const firebase = {
     StorageService,
     AuthenticationService,
     ProfileService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ]
 })
 export class AppModule {}

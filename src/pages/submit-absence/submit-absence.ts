@@ -54,7 +54,7 @@ export class SubmitAbsencePage {
   onDateChanged() {
     if (this.formAbsence.get('dateStart').value !== '' && this.formAbsence.get('dateEnd').value !== '') {
 
-      console.log('jalan ga sih ?')
+      // console.log('jalan ga sih ?')
       this.formAbsence.patchValue({duration: 3});
 
     }
