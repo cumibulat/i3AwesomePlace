@@ -14,23 +14,23 @@
           Ada jumlah item : {{cntShoppingCart}}
         </ion-col>
       </ion-row>
+      
       <ion-row>
-        <ion-col col-6 col-md-4 col-xl-3>
+        <ion-col col-6 col-md-4 col-xl-3 *ngFor="let item of listBestSeller">
           <div class="product-border">
             <div class="image-container">
-              <img
-                src="https://i0.wp.com/rumahtanaman.com/wp-content/uploads/2017/11/mangga-simanalagi.jpg?resize=300%2C225&ssl=1">
+              <img [src]="item.imageUrl">
             </div>
-            <div class="product-title">Mangga Manalagi</div>
-            <div class="product-subtitle">Mangga Manalagi</div>
+            <div class="product-title">{{item.name}}</div>
+            <div class="product-subtitle">{{item.name}}</div>
             <div>
-              <span class="product-title">Rp 26.000</span>
+              <span class="product-title">Rp {{item.price}}</span>
               <span class="product-subtitle"> / 1 pcs</span>
             </div>
-            <button ion-button block round small>Add to Cart</button>
+            <button ion-button block round small (click)="addToCart(item.id)">Add to Cart</button>
           </div>
         </ion-col>
-        <ion-col col-6 col-md-4 col-xl-3>
+        <!-- <ion-col col-6 col-md-4 col-xl-3>
           <div class="product-border">
             <div class="image-container">
               <img src="https://5.imimg.com/data5/CP/OX/MY-3674107/rambutan-fruit-500x500.jpg">
@@ -74,7 +74,7 @@
             </div>
             <button ion-button block round small (click)="addToCart()">Add to Cart</button>
           </div>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
 

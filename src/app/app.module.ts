@@ -56,6 +56,7 @@ import { SubmitAbsencePageModule } from '../pages/submit-absence/submit-absence.
 import { BestSellerPageModule } from '../pages/best-seller/best-seller.module';
 import { StorageService } from '../services/storage';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductService } from '../services/product';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -135,18 +136,19 @@ const firebase = {
     Camera,
     File,
     FingerprintAIO,
-    PlacesService,
     GoogleMaps,
     Firebase,
     FcmProvider,
-    AuthenticationService,
-    ProfileService,
     LoaderProvider,
     PopupNotifProvider,
     GlobalConstants,
     AuthProvider,
     AngularFireAuth,
-    StorageService
+    PlacesService,
+    StorageService,
+    AuthenticationService,
+    ProfileService,
+    ProductService
   ]
 })
 export class AppModule {}
