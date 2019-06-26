@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {
   StorageService
 } from './../../services/storage';
@@ -33,7 +34,8 @@ export class BestSellerPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private storage: Storage,
-    private storageService: StorageService) {
+    private storageService: StorageService,
+    private http: HttpClient) {
 
     // this.storageService.storageObs.subscribe((newValue) => {
     //   // This code will execute when the property has changed and also
@@ -50,6 +52,14 @@ export class BestSellerPage {
       console.log('halow : ', data);
       this.cntShoppingCart = data;
     });
+
+    this.http.get('assets/data/countries.json')
+    .subscribe((response: Response) => {
+
+      console.log('cekkkk ** ', response.data);
+    });
+
+
 
   }
 

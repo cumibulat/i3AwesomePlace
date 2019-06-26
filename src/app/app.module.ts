@@ -43,7 +43,6 @@ import { SendmessagePage } from '../pages/sendmessage/sendmessage';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ProfilePage } from '../pages/profile/profile';
-import { HttpModule } from '@angular/http';
 import { LoaderProvider } from '../providers/loader/loader';
 import { PopupNotifProvider } from '../providers/popup-notif/popup-notif';
 import { ChartingPage } from '../pages/charting/charting';
@@ -56,6 +55,7 @@ import { RegisterPageModule } from '../pages/register/register.module';
 import { SubmitAbsencePageModule } from '../pages/submit-absence/submit-absence.module';
 import { BestSellerPageModule } from '../pages/best-seller/best-seller.module';
 import { StorageService } from '../services/storage';
+import { HttpClientModule } from '@angular/common/http';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -90,7 +90,7 @@ const firebase = {
         dayNames: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
         dayShortNames: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
       }),
-    HttpModule,
+    HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyANaRi8e3X-0S3brU1s6p4LtXdW_UJGaNY'
     }),
