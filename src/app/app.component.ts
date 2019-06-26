@@ -51,15 +51,21 @@ export class AwesomePlaces {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      this.authenticationService.authenticationState.subscribe(state => {
-        if (state) {
-          // this.router.navigate(['members', 'dashboard']);
-          this.rootPage = HomePage;
-        } else {
-          // this.router.navigate(['login']);
-          this.rootPage = LoginPage;
-        }
-      });
+      // temporary comment so dont have to do login.
+      // this.authenticationService.authenticationState.subscribe(state => {
+      //   if (state) {
+      //     // this.router.navigate(['members', 'dashboard']);
+      //     this.rootPage = HomePage;
+      //   } else {
+      //     // this.router.navigate(['login']);
+      //     this.rootPage = LoginPage;
+      //   }
+      // });
+
+      //by pass login screen
+      this.authenticationService.setAuthenticated();
+      this.rootPage = HomePage;
+      //end of by pass login screen
     });
   }
 }

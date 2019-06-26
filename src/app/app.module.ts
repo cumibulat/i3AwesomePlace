@@ -55,6 +55,7 @@ import { NativeMapsPageModule } from '../pages/native-maps/native-maps.module';
 import { RegisterPageModule } from '../pages/register/register.module';
 import { SubmitAbsencePageModule } from '../pages/submit-absence/submit-absence.module';
 import { BestSellerPageModule } from '../pages/best-seller/best-seller.module';
+import { StorageService } from '../services/storage';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -144,7 +145,8 @@ const firebase = {
     PopupNotifProvider,
     GlobalConstants,
     AuthProvider,
-    AngularFireAuth
+    AngularFireAuth,
+    StorageService
   ]
 })
 export class AppModule {}

@@ -8,6 +8,12 @@
 
   <div>
     <ion-grid>
+
+      <ion-row>
+        <ion-col>
+          Ada jumlah item : {{cntShoppingCart}}
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col col-6 col-md-4 col-xl-3>
           <div class="product-border">
@@ -66,9 +72,8 @@
               <span class="product-title">Rp 26.000</span>
               <span class="product-subtitle"> / 1 pcs</span>
             </div>
-            <button ion-button block round small>Add to Cart</button>
+            <button ion-button block round small (click)="addToCart()">Add to Cart</button>
           </div>
-
         </ion-col>
       </ion-row>
     </ion-grid>
