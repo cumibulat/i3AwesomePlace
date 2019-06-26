@@ -1,0 +1,28 @@
+{
+    "data": [ 
+        {
+            "id" : "101",
+            "name": "Mangga", 
+            "price": "2000",
+            "imageUrl": "https://i0.wp.com/rumahtanaman.com/wp-content/uploads/2017/11/mangga-simanalagi.jpg?resize=300%2C225&ssl=1"
+        }, 
+        {   
+            "id" : "102",
+            "name": "Durian Tembaga", 
+            "price": "5000",
+            "imageUrl": "https://res.cloudinary.com/dk0z4ums3/image/upload/v1538708794/attached_image/ini-manfaat-durian-bagi-kesehatan-tubuh-alodokter.jpg"
+        }, 
+        {   
+            "id" : "103",
+            "name": "Rambutan", 
+            "price": "2500",
+            "imageUrl": "https://5.imimg.com/data5/CP/OX/MY-3674107/rambutan-fruit-500x500.jpg"
+        }, 
+        {   
+            "id" : "104",
+            "name": "Blueberry", 
+            "price": "3700",
+            "imageUrl": "http://www.sajadah.co/wp-content/uploads/2017/09/manfaat-buah-blueberry-bagi-kesehatan-300x240.jpg"
+        }
+    ]
+}
