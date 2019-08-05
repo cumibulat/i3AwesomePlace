@@ -26,11 +26,25 @@ page-best-seller {
         font-weight: bold;
         color: map-get($colors, primary);
         margin: 5px 0 0 0;
+        -webkit-transition: 100px 1s; 
+        -moz-transition: 100px 1s; 
+        -ms-transition: 100px 1s; 
+        -o-transition: 100px 1s; 
+        transition: 100px 1s;
     }
     .cart-highlight{
         font-size: 14px;
         font-weight: bold;
         color: map-get($colors, secondary);
         margin: 5px 0 0 0;
+        -webkit-transition: 100px 1s; 
+        -moz-transition: 100px 1s; 
+        -ms-transition: 100px 1s; 
+        -o-transition: 100px 1s; 
+        transition: 100px 1s;
+    }
+    .cart-text.ng-enter {
+        -webkit-animation: fadeInLeft 1s;
+        animation: fadeInLeft 1s;
     }
 }
