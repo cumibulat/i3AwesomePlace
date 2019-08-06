@@ -32,6 +32,7 @@ import {
 })
 export class NativeMapsPage {
   map: GoogleMap;
+  cameraLocation: String;
 
   constructor(
     public navCtrl: NavController,
@@ -102,6 +103,21 @@ export class NativeMapsPage {
       }
     });
 
+    let options: GeocoderRequest = {
+      position: {
+        lat: lat,
+        lng: lng
+      }
+    };
+
+    // initiate default camera location title
+    Geocoder.geocode(options)
+      .then((results: GeocoderResult[]) => {
+        if (results.length > 0 && results[0].extra && results[0].extra.lines.length > 0) {
+          this.cameraLocation = results[0].extra.lines[0];
+        }
+      })
+
     // marker.on(GoogleMapsEvent.MARKER_DRAG).subscribe(
     //   () => {
     //     console.log('lat 1 :: ', marker.getPosition().lat);
@@ -126,27 +142,28 @@ export class NativeMapsPage {
         };
 
         Geocoder.geocode(options)
-        .then((results: GeocoderResult[]) => {
-          if(results.length > 0 && results[0].extra && results[0].extra.lines.length > 0) {
-            marker.setTitle(results[0].extra.lines[0]);
-            marker.showInfoWindow();
-          }
-        })
+          .then((results: GeocoderResult[]) => {
+            if (results.length > 0 && results[0].extra && results[0].extra.lines.length > 0) {
+              this.cameraLocation = results[0].extra.lines[0];
+              marker.setTitle(results[0].extra.lines[0]);
+              marker.showInfoWindow();
+            }
+          })
       });
 
     // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
     //   alert('clicked');
     // });
 
-    
+
   }
 
   ionViewDidLoad() {
     this.loadMap();
   }
 
-  onButtonClick(ev: any) {
-    alert('check :: ' + ev);
+  onButtonClick() {
+    alert('check :: ' + this.cameraLocation);
   }
 
 }
