@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Address Detail</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- <p *ngIf="submitAttempt" style="color: #ea6153;font-weight: bold;">Please fill out all details accurately.</p> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h5>Deliver To : </h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h2>{{deliveryAddress}}</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list lines="none">
+    <form [formGroup]="formReceiverDetail">
+      <ion-item>
+        <ion-label>Floor / Unit Number</ion-label>
+        <ion-input type="text" formControlName="unit_number"> </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Driver Note</ion-label>
+        <ion-textarea formControlName="driver_note" rows="5" maxLength="1000" placeholder="Driver Note.."
+          [class.invalid]="!formReceiverDetail.controls.driver_note.valid && submitAttempt"></ion-textarea>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3>Order Summary</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3>Payment Method</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="secondary" block (click)="doSubmit()">Place Order</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

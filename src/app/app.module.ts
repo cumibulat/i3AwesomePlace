@@ -58,6 +58,7 @@ import { StorageService } from '../services/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../services/product';
 import { ShoppingCartService } from '../services/shoppingCart';
+import { ReceiverDetailPageModule } from '../pages/receiver-detail/receiver-detail.module';
 
 const firebase = {
   apiKey: "AIzaSyBaSYxPOEUXm0GjKx3yjX4PByiTR2N1EkE",
@@ -111,7 +112,8 @@ const firebase = {
     ProfilePageModule,
     ChartingPageModule,
     SubmitAbsencePageModule,
-    BestSellerPageModule
+    BestSellerPageModule,
+    ReceiverDetailPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

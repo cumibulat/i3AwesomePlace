@@ -49,16 +49,24 @@ public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(
     this.storage.get('localShoppingCart').then(res => {
       let lShopCart: any[] = [];
       if (res) {
-        console.log('cek res :: ', res)
+        // console.log('cek res :: ', res)
         lShopCart = res;
       }
-      console.log('cek lShopCart :: ', lShopCart.length)
+      // console.log('cek lShopCart :: ', lShopCart.length)
       this.countShoppingCart.next(lShopCart.length);
     })
   }
 
   public removeFromShoppingCart(idProduct: number): void {
     console.log('masuk removeFromShoppingCart ')
+  }
+
+  public setDeliveryAddress(addr: String): void {
+    this.storage.set('deliveryAddress', addr);
+  }
+
+  public getDeliveryAddress() {
+    return this.storage.get('deliveryAddress');
   }
 
 }

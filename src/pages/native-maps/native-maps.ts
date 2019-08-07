@@ -24,6 +24,8 @@ import {
 import {
   Geolocation
 } from '@ionic-native/geolocation';
+import { ShoppingCartService } from '../../services/shoppingCart';
+import { ReceiverDetailPage } from '../receiver-detail/receiver-detail';
 
 @IonicPage()
 @Component({
@@ -38,7 +40,8 @@ export class NativeMapsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private geolocation: Geolocation,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private shoppingCartSvc: ShoppingCartService
   ) {}
 
   loadMap() {
@@ -155,7 +158,6 @@ export class NativeMapsPage {
     //   alert('clicked');
     // });
 
-
   }
 
   ionViewDidLoad() {
@@ -163,7 +165,10 @@ export class NativeMapsPage {
   }
 
   onButtonClick() {
-    alert('check :: ' + this.cameraLocation);
+    // alert('check :: ' + this.cameraLocation);
+    this.shoppingCartSvc.setDeliveryAddress(this.cameraLocation);
+
+    this.navCtrl.push(ReceiverDetailPage);
   }
 
 }
