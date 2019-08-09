@@ -164,7 +164,7 @@ export class NativeMapsPage {
     this.loadMap();
   }
 
-  onButtonClick() {
+  doConfirmAddress() {
     // alert('check :: ' + this.cameraLocation);
     this.shoppingCartSvc.setDeliveryAddress(this.cameraLocation);
 

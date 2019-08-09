@@ -39,6 +39,11 @@
         <h3>Order Summary</h3>
       </ion-col>
     </ion-row>
+    <ion-row *ngFor="let item of listShoppingCart">
+      <ion-col>
+        <span class="product-title">{{item.name}}({{item.qty}})</span>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col>
         <h3>Payment Method</h3>

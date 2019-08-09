@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ShoppingCartService } from '../../services/shoppingCart';
+import { Product } from '../../models/product';
 
 /**
  * Generated class for the ReceiverDetailPage page.
@@ -20,6 +21,7 @@ export class ReceiverDetailPage {
   formReceiverDetail: FormGroup;
   submitAttempt: boolean = false;
   deliveryAddress: String;
+  listShoppingCart: Array<Product>;
 
   constructor(
     public navCtrl: NavController, 
@@ -36,8 +38,13 @@ export class ReceiverDetailPage {
   ionViewDidLoad() {
     // console.log('ionViewDidLoad ReceiverDetailPage');
     this.shoppingCartSvc.getDeliveryAddress().then((data)=>{
-      console.log("jalan ni load address");
       this.deliveryAddress = data;
+    });
+
+    this.shoppingCartSvc.getListShoppingCart().then((data)=>{
+      this.listShoppingCart = data;
+
+      console.log('halo :: ', this.listShoppingCart);
     });
   }
 

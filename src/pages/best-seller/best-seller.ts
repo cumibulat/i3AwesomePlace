@@ -23,6 +23,7 @@ import {
 } from '../../models/product';
 import { ProductService } from '../../services/product';
 import { ShoppingCartService } from '../../services/shoppingCart';
+import { NativeMapsPage } from '../native-maps/native-maps';
 
 /**
  * Generated class for the BestSellerPage page.
@@ -65,7 +66,7 @@ export class BestSellerPage {
   }
 
 
-  addToCart(id: number) {
+  addToCart(item: Product) {
     // const dt = new Date();
     // this.storage.get('localShoppingCart').then(res => {
     //   console.log('ini apa ? ', res);
@@ -83,9 +84,13 @@ export class BestSellerPage {
 
     // this.storageService.updateCount(Math.floor(Math.random() * 10));
 
-    this.shoppingCartSvc.addToShoppingCart(id);
+    this.shoppingCartSvc.addToShoppingCart(item);
 
 
+  }
+
+  doCheckout() {
+    this.navCtrl.push(NativeMapsPage);
   }
 
   ionViewDidLoad() {

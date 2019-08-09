@@ -5,11 +5,12 @@ import {
   Injectable
 } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { Product } from "../models/product";
 
 @Injectable()
 export class ShoppingCartService {
 
-public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private storage: Storage) {}
 
@@ -17,14 +18,14 @@ public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(
     this.storage.set(key, value);
   }
 
-  public addToShoppingCart(idProduct: number): void {
+  public addToShoppingCart(item: Product): void {
     this.storage.get('localShoppingCart').then(res => {
       let lShopCart: any[] = [];
       if (res) {
         lShopCart = res;
       }
 
-      const cartIdx = lShopCart.findIndex((obj => obj.id == idProduct));
+      const cartIdx = lShopCart.findIndex((obj => obj.id == item.id));
 
       if (cartIdx != -1) {
         // if product already exist then increase qty by 1.
@@ -33,7 +34,8 @@ public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(
       } else {
         // if product not exist in cart then create new product
         let objProduct = {
-          id: idProduct,
+          id: item.id,
+          name: item.name,
           qty: 1,
         }
         lShopCart.push(objProduct);
@@ -67,6 +69,10 @@ public countShoppingCart: BehaviorSubject<number> = new BehaviorSubject<number>(
 
   public getDeliveryAddress() {
     return this.storage.get('deliveryAddress');
+  }
+
+  public getListShoppingCart() {
+    return this.storage.get('localShoppingCart');
   }
 
 }
